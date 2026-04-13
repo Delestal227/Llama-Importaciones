@@ -1,33 +1,60 @@
 # Configuración de Routing - LLAMA IMPORTACIONES
 
-## Estado Actual
+## Estado Actual ✅
 
-El sitio utiliza **hash-based routing** con URLs como:
-- `https://llama-importaciones.onrender.com/#/`
-- `https://llama-importaciones.onrender.com/#/categorias`
-- `https://llama-importaciones.onrender.com/#/catalogo`
-
-## URLs Deseadas (Sin hash)
-
-Si deseas URLs sin el hash (`#/`):
+El sitio utiliza **pathname-based routing** (sin hash) con URLs como:
 - `https://llama-importaciones.onrender.com/`
 - `https://llama-importaciones.onrender.com/categorias`
 - `https://llama-importaciones.onrender.com/catalogo`
 
-## Cómo Configurar en Render
+## Cómo Funciona
 
-1. **Crear un archivo `render.yaml` en la raíz del proyecto:**
+1. **Archivo `render.yaml`** - Configura Render para servir `index.html` para todas las rutas
+2. **JavaScript client-side** - El código maneja el routing y muestra/oculta secciones sin recargar
+3. **History API** - Usa `history.pushState()` para cambiar la URL sin recargar
 
-```yaml
-routes:
-  - path: "/*"
-    method: "GET"
-    route: "index.html"
+## Rutas Disponibles
+
+| URL | Sección |
+|-----|---------|
+| `/` | Hero (Inicio) |
+| `/inicio` | Hero (Alias) |
+| `/sobre` | Sobre Nosotros |
+| `/categorias` | Categorías de Productos |
+| `/catalogo` | Catálogo Completo |
+| `/como-comprar` | Cómo Comprar |
+| `/contacto` | Contacto |
+| `/redes-sociales` | Redes Sociales |
+| `/categorias/bazar` | Catálogo filtrado por Bazar & Cocina |
+| `/categorias/electronica` | Catálogo filtrado por Electrónica |
+| `/categorias/hogar` | Catálogo filtrado por Hogar |
+| `/categorias/cuidado` | Catálogo filtrado por Cuidado Personal |
+| `/categorias/tecnologia` | Catálogo filtrado por Tecnología |
+
+## Configuración para Otros Hosts
+
+### Netlify
+
+Crea un archivo `_redirects`:
+```
+/* /index.html 200
 ```
 
-Esto le dice a Render que sirva `index.html` para TODAS las rutas, permitiendo que el JavaScript client-side maneje el routing.
+### Vercel
 
-2. **O crear un archivo `.htaccess` (si usa hosting con Apache):**
+Usa `vercel.json`:
+```json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
+
+### Apache (.htaccess)
 
 ```apache
 <IfModule mod_rewrite.c>
@@ -40,49 +67,9 @@ Esto le dice a Render que sirva `index.html` para TODAS las rutas, permitiendo q
 </IfModule>
 ```
 
-3. **O en Netlify, agregar `_redirects` file:**
+### GitHub Pages
 
-```
-/* /index.html 200
-```
-
-## Cómo Cambiar a Pathname Routing
-
-Si configuraste el servidor, puedes cambiar el código JavaScript de `hash-based` a `pathname-based`:
-
-En `index.html`, busca la sección de routing y cambia:
-
-```javascript
-// CAMBIAR DE:
-function navigateTo(path) {
-    // ... código ...
-    window.location.hash = '#/' + path;
-}
-
-// A:
-function navigateTo(path) {
-    // ... código ...
-    window.history.pushState({ path }, '', path);
-}
-```
-
-## Rutas Disponibles
-
-| URL | Sección |
-|-----|---------|
-| `/` | Hero (Inicio) |
-| `/sobre` | Sobre Nosotros |
-| `/categorias` | Categorías de Productos |
-| `/catalogo` | Catálogo Completo |
-| `/como-comprar` | Cómo Comprar |
-| `/contacto` | Contacto |
-| `/redes-sociales` | Redes Sociales |
-| `/carrito` | Carrito (Abre Modal) |
-| `/categorias/bazar` | Catálogo filtrado por Bazar & Cocina |
-| `/categorias/electronica` | Catálogo filtrado por Electrónica |
-| `/categorias/hogar` | Catálogo filtrado por Hogar |
-| `/categorias/cuidado` | Catálogo filtrado por Cuidado Personal |
-| `/categorias/tecnologia` | Catálogo filtrado por Tecnología |
+No soporta pathname routing directo. Usar hash-based routing en su lugar.
 
 ---
 

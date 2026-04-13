@@ -553,13 +553,17 @@
         initializeHeroVideo();
         initializeGoogleSignIn();
 
-        // Initialize routing based on current hash
-        const route = getRouteFromHash();
-        const sectionId = routeMap[route] || routeMap[''];
+        // Initialize routing based on current pathname
+        const route = getCurrentRoute();
+        const sectionId = routeMap[route];
         if (sectionId) {
             showSection(sectionId);
-        } else {
+        } else if (route === '/') {
             showSection('hero');
+        } else {
+            // Route not found, show hero as fallback
+            showSection('hero');
+            window.history.replaceState({ path: '/' }, '', '/');
         }
     });
 
@@ -1351,29 +1355,25 @@
         }
     }
 
-    // ===== CLIENT-SIDE ROUTING (Hash-based for static hosting) =====
+    // ===== CLIENT-SIDE ROUTING (Pathname-based without hash) =====
     //
-    // Actualmente usa routing basado en hash (#/):
-    // - https://llama-importaciones.onrender.com/#/
-    // - https://llama-importaciones.onrender.com/#/categorias
-    // - https://llama-importaciones.onrender.com/#/catalogo
-    //
-    // Para usar URLs sin hash (/categorias), necesitas configurar el servidor.
-    // Consulta ROUTING.md para instrucciones de configuración en Render/Netlify.
+    // URLs sin hash:
+    // - https://llama-importaciones.onrender.com/
+    // - https://llama-importaciones.onrender.com/categorias
+    // - https://llama-importaciones.onrender.com/catalogo
     //
 
     // Route mapping to section IDs
     const routeMap = {
-        '': 'hero',      // #/
-        '/': 'hero',     // #/
-        'inicio': 'hero',
-        'sobre': 'about',
-        'categorias': 'categories',
-        'catalogo': 'catalog',
-        'como-comprar': 'how-to-buy',
-        'contacto': 'trust',
-        'redes-sociales': 'socials',
-        'carrito': null  // Special case - opens modal
+        '/': 'hero',
+        '/inicio': 'hero',
+        '/sobre': 'about',
+        '/categorias': 'categories',
+        '/catalogo': 'catalog',
+        '/como-comprar': 'how-to-buy',
+        '/contacto': 'trust',
+        '/redes-sociales': 'socials',
+        '/carrito': null  // Special case - opens modal
     };
 
     // Hide all sections
@@ -1393,52 +1393,61 @@
         }
     }
 
-    // Parse route from hash
-    function getRouteFromHash() {
-        const hash = window.location.hash.slice(2); // Remove #/
-        return hash || '';
+    // Get current route from pathname
+    function getCurrentRoute() {
+        let path = window.location.pathname;
+        // Remove trailing slash if present (except for root)
+        if (path !== '/' && path.endsWith('/')) {
+            path = path.slice(0, -1);
+        }
+        return path;
     }
 
     // Main navigation function
     function navigateTo(path) {
-        // Remove leading slash for hash-based routing
-        path = path.startsWith('/') ? path.slice(1) : path;
+        // Ensure path starts with /
+        if (!path.startsWith('/')) {
+            path = '/' + path;
+        }
 
-        // Handle category routes like categorias/bazar
-        if (path.startsWith('categorias/')) {
-            const category = path.split('/')[1];
+        // Handle category routes like /categorias/bazar
+        if (path.startsWith('/categorias/')) {
+            const category = path.split('/')[2];
             filterProducts(category);
-            path = 'catalogo';
+            path = '/catalogo';
         }
 
         // Get the section ID from the route
-        const sectionId = routeMap[path] || routeMap[''];
+        const sectionId = routeMap[path];
 
         // Handle special cases
-        if (path === 'carrito') {
+        if (path === '/carrito') {
             openCheckoutModal();
             return;
         }
 
         if (sectionId) {
             showSection(sectionId);
+        } else if (path === '/') {
+            showSection('hero');
         } else {
+            console.warn('Route not found:', path);
             showSection('hero');
         }
 
-        // Update browser URL with hash-based routing
-        window.location.hash = '#/' + path;
+        // Update browser URL with pathname routing
+        window.history.pushState({ path }, '', path);
     }
 
-    // Handle hash change (browser back/forward, direct hash navigation)
-    window.addEventListener('hashchange', () => {
-        const route = getRouteFromHash();
-        const sectionId = routeMap[route] || routeMap[''];
+    // Handle browser back/forward buttons (popstate)
+    window.addEventListener('popstate', (event) => {
+        const path = event.state?.path || '/';
+        const sectionId = routeMap[path];
 
-        if (sectionId) {
-            showSection(sectionId);
-        } else if (route === 'carrito') {
+        if (path === '/carrito') {
             openCheckoutModal();
+        } else if (sectionId) {
+            showSection(sectionId);
         } else {
             showSection('hero');
         }
