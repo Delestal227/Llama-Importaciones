@@ -719,12 +719,13 @@
 
     // Renderizar carrusel combinado (detecta automáticamente video/imagen)
     function renderMediaCarousel(product) {
-        if (!product.mediaUrls || product.mediaUrls.length === 0) return '';
+        const mediaUrls = product.mediaUrls || [];
+        if (!Array.isArray(mediaUrls) || mediaUrls.length === 0) return '';
 
         const media = [];
 
         // Procesar cada URL y detectar si es video o imagen
-        product.mediaUrls.forEach(url => {
+        mediaUrls.forEach(url => {
             if (isVideoUrl(url)) {
                 const videoId = extractVideoId(url);
                 if (videoId) {
