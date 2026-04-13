@@ -1480,10 +1480,8 @@
         closeCheckoutModal();
         filterProducts(category);
 
-        // Scroll to catalog section
-        setTimeout(() => {
-            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        // Navigate to catalog with routing
+        navigateTo('/catalogo');
     }
 
     // Close Login Modal
