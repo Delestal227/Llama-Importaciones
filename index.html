@@ -1404,7 +1404,10 @@
         const section = document.getElementById(id);
         if (section) {
             section.classList.add('route-active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll to the section smoothly
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
         }
     }
 
