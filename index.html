@@ -57,6 +57,16 @@
             scroll-behavior: smooth;
         }
 
+        /* Google Sign-In Styles */
+        #google-signin {
+            display: flex;
+            justify-content: center;
+        }
+
+        #google-signin > div {
+            width: auto !important;
+        }
+
         /* Carousel Styles */
         .carousel-container {
             position: relative;
@@ -522,26 +532,30 @@
     });
 
     // Google Sign-In initialization
+    let googleInitialized = false;
     function initializeGoogleSignIn() {
+        if (googleInitialized) return;
         if (typeof google === 'undefined') {
             console.warn('Google API no cargado aún');
             setTimeout(initializeGoogleSignIn, 1000);
             return;
         }
 
+        googleInitialized = true;
         google.accounts.id.initialize({
             client_id: GOOGLE_CLIENT_ID,
             callback: handleSignInResponse
         });
 
-        const signinDiv = document.getElementById('google-signin');
-        if (signinDiv) {
-            google.accounts.id.renderButton(signinDiv, {
-                theme: 'dark',
-                size: 'large',
-                text: 'signin'
-            });
-        }
+        setTimeout(() => {
+            const signinDiv = document.getElementById('google-signin');
+            if (signinDiv && signinDiv.innerHTML === '') {
+                google.accounts.id.renderButton(signinDiv, {
+                    theme: 'dark',
+                    size: 'large'
+                });
+            }
+        }, 100);
     }
 
     // Handle Google Sign-In response
@@ -601,8 +615,12 @@
 
     // Update UI with user info
     function updateUserUI() {
+        const signinDiv = document.getElementById('google-signin');
         const userInfo = document.getElementById('user-info');
-        if (userInfo && currentUser) {
+
+        if (currentUser && userInfo) {
+            signinDiv.style.display = 'none';
+            userInfo.style.display = 'flex';
             userInfo.innerHTML = `
                 <div class="flex items-center gap-2">
                     <img src="${currentUser.picture}" alt="${currentUser.name}" class="w-8 h-8 rounded-full">
@@ -610,6 +628,9 @@
                     <button onclick="signOutUser()" class="text-xs text-secondary hover:text-primary">Cerrar sesión</button>
                 </div>
             `;
+        } else if (signinDiv && userInfo) {
+            signinDiv.style.display = 'block';
+            userInfo.style.display = 'none';
         }
     }
 
