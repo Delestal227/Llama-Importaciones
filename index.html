@@ -942,10 +942,10 @@
                                 <span class="font-michroma text-[10px] ${stockColor} tracking-wider">${stockText}</span>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <button onclick="decrementQuantity('qty-${product.id}')" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>−</button>
-                                <input type="number" min="1" max="${product.stock}" value="1" id="qty-${product.id}" class="w-20 bg-surface-container-highest text-on-surface px-3 py-2 rounded text-center font-body border border-surface-container-high" ${isOutOfStock ? 'disabled' : ''}>
-                                <button onclick="incrementQuantity('qty-${product.id}', ${product.stock})" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>+</button>
-                                <button onclick="addToCart(${product.id})" class="flex-1 ${isOutOfStock ? 'bg-gray-600 cursor-not-allowed' : 'bg-secondary hover:bg-[#F2EDE8]'} text-[#B36843] px-4 py-2 rounded-lg font-bebas text-sm tracking-wider transition-all" ${isOutOfStock ? 'disabled' : ''}>
+                                <button onclick="window.decrementQuantity('qty-${product.sku}')" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>−</button>
+                                <input type="number" min="1" max="${product.stock}" value="1" id="qty-${product.sku}" class="w-20 bg-surface-container-highest text-on-surface px-3 py-2 rounded text-center font-body border border-surface-container-high" ${isOutOfStock ? 'disabled' : ''}>
+                                <button onclick="window.incrementQuantity('qty-${product.sku}', ${product.stock})" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>+</button>
+                                <button onclick="window.addToCart('${product.sku}')" class="flex-1 ${isOutOfStock ? 'bg-gray-600 cursor-not-allowed' : 'bg-secondary hover:bg-[#F2EDE8]'} text-[#B36843] px-4 py-2 rounded-lg font-bebas text-sm tracking-wider transition-all" ${isOutOfStock ? 'disabled' : ''}>
                                     ${isOutOfStock ? 'AGOTADO' : 'AGREGAR'}
                                 </button>
                             </div>
@@ -1145,9 +1145,10 @@
     };
 
     // Add to Cart
-    window.addToCart = function(productId) {
-        const quantity = parseInt(document.getElementById(`qty-${productId}`).value);
-        const product = products.find(p => p.id === productId);
+    window.addToCart = function(productIdentifier) {
+        // Can accept either SKU or ID
+        const quantity = parseInt(document.getElementById(`qty-${productIdentifier}`).value);
+        const product = products.find(p => p.sku === productIdentifier || p.id === productIdentifier);
 
         // Validar stock disponible
         if (product.stock === 0) {
