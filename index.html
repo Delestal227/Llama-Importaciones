@@ -139,12 +139,12 @@
     <nav class="flex justify-between items-center w-full px-8 py-6 max-w-screen-2xl mx-auto">
         <div class="text-2xl font-bebas tracking-tighter text-[#F2EDE8]">llama importaciones</div>
         <div class="hidden md:flex items-center gap-x-8">
-            <a onclick="navigateTo('/')" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300 cursor-pointer">Inicio</a>
-            <a onclick="navigateTo('/sobre')" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300 cursor-pointer">Sobre</a>
-            <a onclick="navigateTo('/categorias')" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300 cursor-pointer">Categorias</a>
-            <a onclick="navigateTo('/catalogo')" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300 cursor-pointer">Catalogo</a>
-            <a onclick="navigateTo('/redes-sociales')" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300 cursor-pointer">Redes Sociales</a>
-            <a onclick="navigateTo('/contacto')" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300 cursor-pointer">Contacto</a>
+            <a href="#hero" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300">Inicio</a>
+            <a href="#about" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300">Sobre</a>
+            <a href="#categories" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300">Categorias</a>
+            <a href="#catalog" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300">Catalogo</a>
+            <a href="#socials" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300">Redes Sociales</a>
+            <a href="#trust" class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300">Contacto</a>
         </div>
         <div class="flex items-center gap-4">
             <div id="google-signin" style="display: block;"></div>
@@ -175,7 +175,7 @@
             <h1 class="font-bebas text-9xl md:text-[14rem] leading-none tracking-tight text-on-surface">LLEGÓ.</h1>
             <p class="font-michroma text-xs md:text-sm tracking-[0.4em] text-primary uppercase mt-8 opacity-80">LLAMA IMPORTACIONES · SSJ</p>
             <div class="flex flex-col md:flex-row items-center justify-center gap-6 mt-16">
-                <a onclick="navigateTo('/catalogo')" class="bg-[#F2EDE8] text-[#B36843] px-12 py-4 rounded-lg font-bebas text-2xl tracking-widest hover:bg-secondary transition-all duration-300 shadow-xl cursor-pointer">VER CATALOGO</a>
+                <a href="#catalog" class="bg-[#F2EDE8] text-[#B36843] px-12 py-4 rounded-lg font-bebas text-2xl tracking-widest hover:bg-secondary transition-all duration-300 shadow-xl">VER CATALOGO</a>
                 <button onclick="contactViaWhatsApp()" class="border border-[#F2EDE8]/40 text-on-surface px-12 py-4 rounded-lg font-bebas text-2xl tracking-widest backdrop-blur-sm hover:bg-[#B36843]/60 transition-all duration-300">CONSULTAR POR DM</button>
             </div>
         </div>
@@ -544,28 +544,6 @@
         loadCart();
         initializeHeroVideo();
         initializeGoogleSignIn();
-
-        // Initialize scroll spy for routing
-        initScrollSpy();
-
-        // Handle current URL
-        const route = window.location.pathname;
-
-        // Handle special carrito route
-        if (route === '/carrito') {
-            openCheckoutModal();
-        } else {
-            const sectionId = routeMap[route];
-            if (sectionId && route !== '/') {
-                // Scroll to the section if not on home page
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    setTimeout(() => {
-                        section.scrollIntoView({ behavior: 'auto', block: 'start' });
-                    }, 100);
-                }
-            }
-        }
     });
 
     // Google Sign-In initialization
@@ -1180,10 +1158,6 @@
     // Close Cart
     function closeCart() {
         document.getElementById('cart-modal').classList.add('hidden');
-        // Go back to previous route if we came from /carrito
-        if (window.location.pathname === '/carrito') {
-            window.history.back();
-        }
     }
 
     // Open Checkout Modal
@@ -1200,10 +1174,6 @@
     // Close Checkout Modal
     function closeCheckoutModal() {
         document.getElementById('checkout-modal').classList.add('hidden');
-        // Go back to previous route if we came from /carrito
-        if (window.location.pathname === '/carrito') {
-            window.history.back();
-        }
     }
 
     // Render Checkout Modal
@@ -1364,123 +1334,6 @@
         }
     }
 
-    // ===== CLIENT-SIDE ROUTING (Pathname-based with scroll spy) =====
-    //
-    // URLs sin hash:
-    // - https://llama-importaciones.onrender.com/
-    // - https://llama-importaciones.onrender.com/categorias
-    // - https://llama-importaciones.onrender.com/catalogo
-    //
-    // La URL cambia automáticamente al scrollear
-
-    // Route mapping to section IDs
-    const routeMap = {
-        '/': 'hero',
-        '/inicio': 'hero',
-        '/sobre': 'about',
-        '/categorias': 'categories',
-        '/catalogo': 'catalog',
-        '/como-comprar': 'how-to-buy',
-        '/contacto': 'trust',
-        '/redes-sociales': 'socials',
-        '/carrito': null  // Special case - opens modal
-    };
-
-    // Reverse map: section ID to route
-    const sectionToRoute = {
-        'hero': '/',
-        'about': '/sobre',
-        'categories': '/categorias',
-        'catalog': '/catalogo',
-        'how-to-buy': '/como-comprar',
-        'trust': '/contacto',
-        'socials': '/redes-sociales'
-    };
-
-    // Main navigation function - scroll to section
-    function navigateTo(path) {
-        // Ensure path starts with /
-        if (!path.startsWith('/')) {
-            path = '/' + path;
-        }
-
-        // Handle category routes like /categorias/bazar
-        if (path.startsWith('/categorias/')) {
-            const category = path.split('/')[2];
-            filterProducts(category);
-            path = '/catalogo';
-        }
-
-        // Get the section ID from the route
-        const sectionId = routeMap[path];
-
-        // Handle special cases
-        if (path === '/carrito') {
-            openCheckoutModal();
-            // Update browser URL
-            window.history.pushState({ path }, '', path);
-            return;
-        }
-
-        if (sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                // Update URL first
-                window.history.pushState({ path }, '', path);
-                // Then scroll to section
-                setTimeout(() => {
-                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 50);
-            }
-        }
-    }
-
-    // Initialize Intersection Observer for scroll spy
-    function initScrollSpy() {
-        // Get all routable sections
-        const sections = Object.keys(sectionToRoute).map(id => document.getElementById(id)).filter(el => el);
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -66% 0px', // Trigger when section is in top 1/3
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const sectionId = entry.target.id;
-                    const route = sectionToRoute[sectionId];
-                    if (route) {
-                        // Update URL without reloading
-                        window.history.replaceState({ path: route }, '', route);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections
-        sections.forEach(section => observer.observe(section));
-    }
-
-    // Handle browser back/forward buttons (popstate)
-    window.addEventListener('popstate', (event) => {
-        const path = event.state?.path || '/';
-
-        if (path === '/carrito') {
-            openCheckoutModal();
-        } else {
-            const sectionId = routeMap[path];
-            if (sectionId) {
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    setTimeout(() => {
-                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 50);
-                }
-            }
-        }
-    });
 
     // Smooth scroll behavior
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1518,8 +1371,10 @@
         closeCheckoutModal();
         filterProducts(category);
 
-        // Navigate to catalog with routing
-        navigateTo('/catalogo');
+        // Scroll to catalog section
+        setTimeout(() => {
+            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
     }
 
     // Close Login Modal
