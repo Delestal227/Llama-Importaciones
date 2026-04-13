@@ -135,16 +135,8 @@
             <a class="text-[#F2EDE8] opacity-70 font-michroma text-[10px] tracking-[0.15em] uppercase hover:text-secondary transition-colors duration-300" href="#trust">Contacto</a>
         </div>
         <div class="flex items-center gap-4">
-            <button id="login-btn" onclick="openLoginModal()" class="bg-[#F2EDE8] text-[#B36843] px-6 py-3 rounded-lg font-bebas text-sm tracking-widest hover:bg-secondary transition-transform active:scale-95 uppercase">
-                🔐 Ingresar
-            </button>
-            <div id="user-profile" class="hidden flex items-center gap-3">
-                <img id="user-avatar" src="" alt="Usuario" class="w-10 h-10 rounded-full border-2 border-secondary">
-                <div>
-                    <p id="user-name" class="font-bebas text-sm text-on-surface"></p>
-                    <button onclick="logoutUser()" class="font-michroma text-[8px] text-secondary hover:text-[#F2EDE8] uppercase tracking-wider">Salir</button>
-                </div>
-            </div>
+            <div id="google-signin" style="display: block;"></div>
+            <div id="user-info" class="hidden flex items-center gap-3"></div>
             <button onclick="openCheckoutModal()" class="relative bg-secondary text-[#B36843] px-8 py-3 rounded-lg font-bebas text-lg tracking-widest hover:bg-[#F2EDE8] transition-transform active:scale-95 uppercase flex items-center gap-2">
                 🛒 CARRITO
                 <span id="header-cart-count" class="absolute -top-3 -right-3 bg-[#B36843] text-secondary text-xs font-bebas px-2.5 py-1 rounded-full hidden font-bold">0</span>
@@ -515,16 +507,122 @@
     };
 
     let products = [];
-
     let cart = [];
     let currentFilter = 'all';
+    let currentUser = null;
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFglbGnQmZ9L8wxr8IY8Haa_I7XKA5uYSiaRMHt8QwSyOIt9_ZL4c5s4XnCgoW2jd2/exec';
+    const GOOGLE_CLIENT_ID = '354015976108-34akma2jkl50hbr603l54gut63k40m4a.apps.googleusercontent.com';
 
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
         loadProductsFromGoogleSheets();
         loadCart();
         initializeHeroVideo();
+        initializeGoogleSignIn();
     });
+
+    // Google Sign-In initialization
+    function initializeGoogleSignIn() {
+        if (typeof google === 'undefined') {
+            console.warn('Google API no cargado aún');
+            setTimeout(initializeGoogleSignIn, 1000);
+            return;
+        }
+
+        google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: handleSignInResponse
+        });
+
+        const signinDiv = document.getElementById('google-signin');
+        if (signinDiv) {
+            google.accounts.id.renderButton(signinDiv, {
+                theme: 'dark',
+                size: 'large',
+                text: 'signin'
+            });
+        }
+    }
+
+    // Handle Google Sign-In response
+    function handleSignInResponse(response) {
+        if (response.credential) {
+            const token = response.credential;
+            const decoded = JSON.parse(atob(token.split('.')[1]));
+            currentUser = {
+                email: decoded.email,
+                name: decoded.name,
+                picture: decoded.picture
+            };
+
+            console.log('✅ Usuario autenticado:', currentUser.email);
+            loadUserCartFromSheet();
+            updateUserUI();
+        }
+    }
+
+    // Load user's cart from Google Sheet
+    async function loadUserCartFromSheet() {
+        if (!currentUser) return;
+
+        try {
+            const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getCart&email=' + encodeURIComponent(currentUser.email));
+            const data = await response.json();
+
+            if (data.success && data.cart) {
+                cart = data.cart;
+                saveCart();
+                updateCartUI();
+                console.log('✅ Carrito cargado para:', currentUser.email);
+            }
+        } catch (error) {
+            console.warn('No se pudo cargar carrito del servidor:', error);
+        }
+    }
+
+    // Save user's cart to Google Sheet
+    async function saveUserCartToSheet() {
+        if (!currentUser || cart.length === 0) return;
+
+        try {
+            await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'saveCart',
+                    email: currentUser.email,
+                    cart: cart
+                })
+            });
+            console.log('✅ Carrito guardado para:', currentUser.email);
+        } catch (error) {
+            console.warn('No se pudo guardar carrito:', error);
+        }
+    }
+
+    // Update UI with user info
+    function updateUserUI() {
+        const userInfo = document.getElementById('user-info');
+        if (userInfo && currentUser) {
+            userInfo.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <img src="${currentUser.picture}" alt="${currentUser.name}" class="w-8 h-8 rounded-full">
+                    <span class="text-sm text-on-surface">${currentUser.name}</span>
+                    <button onclick="signOutUser()" class="text-xs text-secondary hover:text-primary">Cerrar sesión</button>
+                </div>
+            `;
+        }
+    }
+
+    // Sign out
+    function signOutUser() {
+        saveUserCartToSheet();
+        currentUser = null;
+        cart = [];
+        updateCartUI();
+        const userInfo = document.getElementById('user-info');
+        if (userInfo) userInfo.innerHTML = '';
+        console.log('✅ Sesión cerrada');
+    }
 
     // Load Products from Google Sheets or JSON fallback
     async function loadProductsFromGoogleSheets() {
