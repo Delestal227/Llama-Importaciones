@@ -547,7 +547,7 @@
 <!-- JavaScript for Functionality -->
 <script>
     // Google Apps Script Configuration (Single URL - All operations)
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVlPGE5jHfRoV7IlKN10KiP8UwAUFXFoFN0XpxDvDKTmFo8J_RdIrewatKqcyJxwhr/exec';
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWN7qSe-4S56_onw9wOETCU44DWqcNTtEqWdAMVzsyGlzw28hPRLpxq7b436K7LxSq/exec';
     const GOOGLE_SHEET_CSV_URL = GOOGLE_APPS_SCRIPT_URL; // Usa la misma URL para productos
 
     // Category to Icon Mapping
@@ -941,11 +941,13 @@
                                 <span class="font-bebas text-2xl text-secondary">$${product.price.toLocaleString()}</span>
                                 <span class="font-michroma text-[10px] ${stockColor} tracking-wider">${stockText}</span>
                             </div>
-                            <div class="flex gap-2 items-center">
-                                <button onclick="decrementQuantity('qty-${product.id}')" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>−</button>
-                                <input type="number" min="1" max="${product.stock}" value="1" id="qty-${product.id}" class="w-20 bg-surface-container-highest text-on-surface px-3 py-2 rounded text-center font-body border border-surface-container-high" ${isOutOfStock ? 'disabled' : ''}>
-                                <button onclick="incrementQuantity('qty-${product.id}', ${product.stock})" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>+</button>
-                                <button onclick="addToCart(${product.id})" class="flex-1 ${isOutOfStock ? 'bg-gray-600 cursor-not-allowed' : 'bg-secondary hover:bg-[#F2EDE8]'} text-[#B36843] px-4 py-2 rounded-lg font-bebas text-sm tracking-wider transition-all" ${isOutOfStock ? 'disabled' : ''}>
+                            <div class="flex flex-col gap-3">
+                                <div class="flex gap-2 items-center justify-between">
+                                    <button onclick="window.decrementQuantity(\`qty-${product.sku}\`)" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>−</button>
+                                    <input type="number" min="1" max="${product.stock}" value="1" id="qty-${product.sku}" class="flex-1 mx-2 bg-surface-container-highest text-on-surface px-3 py-2 rounded text-center font-body border border-surface-container-high" ${isOutOfStock ? 'disabled' : ''}>
+                                    <button onclick="window.incrementQuantity(\`qty-${product.sku}\`, ${product.stock})" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>+</button>
+                                </div>
+                                <button onclick="window.addToCart(\`${product.sku}\`)" class="w-full ${isOutOfStock ? 'bg-gray-600 cursor-not-allowed' : 'bg-secondary hover:bg-[#F2EDE8]'} text-[#B36843] px-4 py-3 rounded-lg font-bebas text-sm tracking-wider transition-all" ${isOutOfStock ? 'disabled' : ''}>
                                     ${isOutOfStock ? 'AGOTADO' : 'AGREGAR'}
                                 </button>
                             </div>
@@ -1145,9 +1147,10 @@
     };
 
     // Add to Cart
-    window.addToCart = function(productId) {
-        const quantity = parseInt(document.getElementById(`qty-${productId}`).value);
-        const product = products.find(p => p.id === productId);
+    window.addToCart = function(productIdentifier) {
+        // Can accept either SKU or ID
+        const quantity = parseInt(document.getElementById(`qty-${productIdentifier}`).value);
+        const product = products.find(p => p.sku === productIdentifier || p.id === productIdentifier);
 
         // Validar stock disponible
         if (product.stock === 0) {
@@ -1161,7 +1164,7 @@
         }
 
         // Validar stock total en carrito
-        const existingItem = cart.find(item => item.id === productId);
+        const existingItem = cart.find(item => item.id === product.id);
         const totalQuantityInCart = (existingItem?.quantity || 0) + quantity;
 
         if (totalQuantityInCart > product.stock) {
