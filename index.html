@@ -260,9 +260,16 @@
                 <button onclick="filterProducts('tecnologia')" data-category="tecnologia" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">TECNOLOGÍA</button>
             </div>
 
-            <!-- Products Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
-                <!-- Products will be rendered here by JavaScript -->
+            <!-- Products Grid with Mobile Navigation -->
+            <div class="relative">
+                <!-- Mobile Navigation Arrows -->
+                <button onclick="scrollProductsLeft()" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 md:hidden bg-secondary text-[#B36843] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#F2EDE8] transition-all shadow-lg font-bebas text-2xl">←</button>
+                <button onclick="scrollProductsRight()" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 md:hidden bg-secondary text-[#B36843] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#F2EDE8] transition-all shadow-lg font-bebas text-2xl">→</button>
+
+                <!-- Products Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible scroll-smooth" id="products-grid" style="scroll-behavior: smooth;">
+                    <!-- Products will be rendered here by JavaScript -->
+                </div>
             </div>
         </div>
     </section>
@@ -876,6 +883,7 @@
             const stockText = product.stock > 0 ? `${product.stock} Unidades Disponibles` : 'AGOTADO';
             const stockColor = product.stock > 0 ? 'text-secondary' : 'text-red-400';
 
+            card.setAttribute('data-product-id', product.id);
             card.innerHTML = `
                 <div class="bg-surface-container-high rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 ${isOutOfStock ? 'opacity-60' : ''}">
                     <div class="relative h-64 bg-surface-container-highest flex items-center justify-center overflow-hidden">
@@ -894,7 +902,9 @@
                                 <span class="font-michroma text-[10px] ${stockColor} tracking-wider">${stockText}</span>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <input type="number" min="1" max="${product.stock}" value="1" id="qty-${product.id}" class="w-16 bg-surface-container-highest text-on-surface px-3 py-2 rounded text-center font-body" ${isOutOfStock ? 'disabled' : ''}>
+                                <button onclick="decrementQuantity('qty-${product.id}')" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>−</button>
+                                <input type="number" min="1" max="${product.stock}" value="1" id="qty-${product.id}" class="w-20 bg-surface-container-highest text-on-surface px-3 py-2 rounded text-center font-body border border-surface-container-high" ${isOutOfStock ? 'disabled' : ''}>
+                                <button onclick="incrementQuantity('qty-${product.id}', ${product.stock})" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>+</button>
                                 <button onclick="addToCart(${product.id})" class="flex-1 ${isOutOfStock ? 'bg-gray-600 cursor-not-allowed' : 'bg-secondary hover:bg-[#F2EDE8]'} text-[#B36843] px-4 py-2 rounded-lg font-bebas text-sm tracking-wider transition-all" ${isOutOfStock ? 'disabled' : ''}>
                                     ${isOutOfStock ? 'AGOTADO' : 'AGREGAR'}
                                 </button>
@@ -1044,6 +1054,38 @@
             }
         });
         renderProducts(category);
+    }
+
+    // Scroll Products Left (Mobile Navigation)
+    function scrollProductsLeft() {
+        const grid = document.getElementById('products-grid');
+        const cardWidth = grid.querySelector('[data-product-id]')?.offsetWidth + 32 || 340; // Card width + gap
+        grid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    }
+
+    // Scroll Products Right (Mobile Navigation)
+    function scrollProductsRight() {
+        const grid = document.getElementById('products-grid');
+        const cardWidth = grid.querySelector('[data-product-id]')?.offsetWidth + 32 || 340; // Card width + gap
+        grid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    }
+
+    // Increment Quantity
+    function incrementQuantity(inputId, maxStock) {
+        const input = document.getElementById(inputId);
+        let value = parseInt(input.value) || 1;
+        if (value < maxStock) {
+            input.value = value + 1;
+        }
+    }
+
+    // Decrement Quantity
+    function decrementQuantity(inputId) {
+        const input = document.getElementById(inputId);
+        let value = parseInt(input.value) || 1;
+        if (value > 1) {
+            input.value = value - 1;
+        }
     }
 
     // Add to Cart
