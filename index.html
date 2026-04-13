@@ -170,8 +170,11 @@
 <!-- Shared Navigation -->
 <header class="bg-[#8B5A3C] docked full-width top-0 sticky z-50 transition-colors duration-300 border-b border-[#F2EDE8]/20">
     <nav class="flex justify-between items-center w-full px-4 md:px-8 py-3 md:py-5 max-w-screen-2xl mx-auto">
-        <div class="text-2xl md:text-4xl font-bebas tracking-tight text-[#F2EDE8] font-bold">LLAMA IMPORTACIONES</div>
-        <div class="hidden md:flex items-center gap-x-12">
+        <!-- Left: Logo -->
+        <div class="text-xl md:text-3xl font-bebas tracking-tight text-[#F2EDE8] font-bold flex-shrink-0">LLAMA IMPORTACIONES</div>
+
+        <!-- Center: Navigation (hidden on mobile) -->
+        <div class="hidden md:flex items-center gap-x-8 flex-1 justify-center">
             <a href="#hero" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Inicio</a>
             <a href="#about" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Sobre</a>
             <a href="#categories" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Categorias</a>
@@ -179,7 +182,9 @@
             <a href="#socials" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Redes Sociales</a>
             <a href="#trust" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Contacto</a>
         </div>
-        <div class="flex items-center gap-2 md:gap-4">
+
+        <!-- Right: Auth & Cart -->
+        <div class="flex items-center gap-2 md:gap-4 flex-shrink-0">
             <div id="google-signin" style="display: block;"></div>
             <div id="user-info" class="hidden flex items-center gap-3"></div>
             <button onclick="openCheckoutModal()" class="relative bg-secondary text-[#B36843] px-4 md:px-8 py-2 md:py-3 rounded-lg font-bebas text-sm md:text-lg tracking-widest hover:bg-[#F2EDE8] transition-transform active:scale-95 uppercase flex items-center gap-1 md:gap-2">
@@ -580,11 +585,23 @@
     let googleInitialized = false;
 
     document.addEventListener('DOMContentLoaded', () => {
+        // Scroll to top on page load
+        window.scrollTo(0, 0);
+        // Delay adicional para asegurar que se queda en el inicio
+        setTimeout(() => {
+            window.scrollTo({top: 0, behavior: 'instant'});
+        }, 50);
+
         loadProductsFromGoogleSheets();
         loadCart();
         initializeHeroVideo();
         initializeGoogleSignIn();
     });
+
+    // Prevent browser from restoring scroll position
+    if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+    }
 
     // Google Sign-In initialization
     function initializeGoogleSignIn() {
@@ -970,13 +987,22 @@
                 return `https://drive.google.com/uc?export=view&id=${match[1]}`;
             }
         }
+
+        // Detectar si es URL de Google Photos (enlace corto)
+        if (url.includes('photos.app.goo.gl')) {
+            // Las URLs de Google Photos no se pueden convertir directamente
+            // Pero podemos intentar cargar de forma segura
+            return url;
+        }
+
         return url;
     }
 
     // Detectar si una URL es video o imagen
     function isVideoUrl(url) {
         if (!url) return false;
-        return /youtube\.com|youtu\.be|vimeo\.com/.test(url.toLowerCase());
+        // Detectar YouTube, Vimeo y extensiones de video
+        return /youtube\.com|youtu\.be|vimeo\.com|\.mp4|\.webm|\.mov|\.avi|\.mkv/.test(url.toLowerCase());
     }
 
     // Renderizar carrusel combinado (detecta automáticamente video/imagen)
@@ -991,9 +1017,17 @@
             if (isVideoUrl(url)) {
                 const videoId = extractVideoId(url);
                 if (videoId) {
+                    // Es un video de YouTube
+                    media.push({
+                        type: 'youtube-video',
+                        id: videoId,
+                        alt: 'Video de ' + product.name
+                    });
+                } else {
+                    // Es un video de otro origen (Cloudinary, etc.)
                     media.push({
                         type: 'video',
-                        id: videoId,
+                        src: url,
                         alt: 'Video de ' + product.name
                     });
                 }
@@ -1013,8 +1047,10 @@
 
         // Si solo hay 1 elemento, mostrarlo sin carrusel
         if (media.length === 1) {
-            if (media[0].type === 'video') {
+            if (media[0].type === 'youtube-video') {
                 return `<iframe src="https://www.youtube.com/embed/${media[0].id}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>`;
+            } else if (media[0].type === 'video') {
+                return `<video src="${media[0].src}" class="w-full h-full object-cover" controls controlsList="nodownload"></video>`;
             } else {
                 return `<img src="${media[0].src}" alt="${media[0].alt}" class="w-full h-full object-cover">`;
             }
@@ -1027,9 +1063,13 @@
         `;
 
         media.forEach((item, idx) => {
-            if (item.type === 'video') {
+            if (item.type === 'youtube-video') {
                 html += `<div class="carousel-media carousel-media-${product.id} ${idx === 0 ? 'active' : ''} absolute inset-0 transition-opacity duration-300 ${idx === 0 ? 'opacity-100' : 'opacity-0'}" data-index="${idx}">
                     <iframe src="https://www.youtube.com/embed/${item.id}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                </div>`;
+            } else if (item.type === 'video') {
+                html += `<div class="carousel-media carousel-media-${product.id} ${idx === 0 ? 'active' : ''} absolute inset-0 transition-opacity duration-300 ${idx === 0 ? 'opacity-100' : 'opacity-0'}" data-index="${idx}">
+                    <video src="${item.src}" class="w-full h-full object-cover" controls controlsList="nodownload"></video>
                 </div>`;
             } else {
                 html += `<img src="${item.src}" alt="${item.alt}" class="carousel-media carousel-media-${product.id} ${idx === 0 ? 'active' : ''} w-full h-full object-cover absolute inset-0 transition-opacity duration-300 ${idx === 0 ? 'opacity-100' : 'opacity-0'}" data-index="${idx}">`;
