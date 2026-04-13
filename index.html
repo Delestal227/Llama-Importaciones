@@ -528,15 +528,25 @@
         loadProductsFromGoogleSheets();
         loadCart();
         initializeHeroVideo();
-        initializeGoogleSignIn();
+        // Dar un poco más de tiempo para que Google API cargue
+        setTimeout(() => {
+            initializeGoogleSignIn();
+        }, 500);
     });
 
     // Google Sign-In initialization
     let googleInitialized = false;
     function initializeGoogleSignIn() {
-        if (googleInitialized) return;
-        if (typeof google === 'undefined') {
-            console.warn('⏳ Google API no cargado aún, reintentando...');
+        console.log('🔍 Intentando inicializar Google Sign-In...');
+        console.log('Google disponible:', typeof window.google !== 'undefined');
+
+        if (googleInitialized) {
+            console.log('⚠️ Google Sign-In ya fue inicializado');
+            return;
+        }
+
+        if (typeof window.google === 'undefined') {
+            console.warn('⏳ Google API no cargado aún, reintentando en 1s...');
             setTimeout(initializeGoogleSignIn, 1000);
             return;
         }
@@ -545,24 +555,29 @@
         console.log('✅ Google API disponible, inicializando...');
 
         try {
-            google.accounts.id.initialize({
+            window.google.accounts.id.initialize({
                 client_id: GOOGLE_CLIENT_ID,
                 callback: handleSignInResponse
             });
+            console.log('✅ google.accounts.id.initialize() completado');
 
+            // Renderizar botón con pequeño delay
             setTimeout(() => {
                 const signinDiv = document.getElementById('google-signin');
                 if (signinDiv) {
-                    console.log('📍 Renderizando botón de Google Sign-In');
-                    google.accounts.id.renderButton(signinDiv, {
+                    console.log('📍 Div google-signin encontrado, renderizando botón...');
+                    window.google.accounts.id.renderButton(signinDiv, {
                         theme: 'dark',
-                        size: 'large',
-                        width: '300'
+                        size: 'large'
                     });
+                    console.log('✅ Botón de Google Sign-In renderizado');
+                } else {
+                    console.error('❌ Div #google-signin no encontrado en el DOM');
                 }
-            }, 100);
+            }, 200);
         } catch (error) {
             console.error('❌ Error al inicializar Google Sign-In:', error);
+            console.error('Stack:', error.stack);
         }
     }
 
