@@ -1,0 +1,12 @@
+{
+  "name": "llama-importaciones",
+  "version": "1.0.0",
+  "description": "Página web para Llama Importaciones",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server -p $PORT"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
