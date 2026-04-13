@@ -536,42 +536,85 @@
     function initializeGoogleSignIn() {
         if (googleInitialized) return;
         if (typeof google === 'undefined') {
-            console.warn('Google API no cargado aún');
+            console.warn('⏳ Google API no cargado aún, reintentando...');
             setTimeout(initializeGoogleSignIn, 1000);
             return;
         }
 
         googleInitialized = true;
-        google.accounts.id.initialize({
-            client_id: GOOGLE_CLIENT_ID,
-            callback: handleSignInResponse
-        });
+        console.log('✅ Google API disponible, inicializando...');
 
-        setTimeout(() => {
-            const signinDiv = document.getElementById('google-signin');
-            if (signinDiv && signinDiv.innerHTML === '') {
-                google.accounts.id.renderButton(signinDiv, {
-                    theme: 'dark',
-                    size: 'large'
-                });
-            }
-        }, 100);
+        try {
+            google.accounts.id.initialize({
+                client_id: GOOGLE_CLIENT_ID,
+                callback: handleSignInResponse
+            });
+
+            setTimeout(() => {
+                const signinDiv = document.getElementById('google-signin');
+                if (signinDiv) {
+                    console.log('📍 Renderizando botón de Google Sign-In');
+                    google.accounts.id.renderButton(signinDiv, {
+                        theme: 'dark',
+                        size: 'large',
+                        width: '300'
+                    });
+                }
+            }, 100);
+        } catch (error) {
+            console.error('❌ Error al inicializar Google Sign-In:', error);
+        }
     }
 
     // Handle Google Sign-In response
     function handleSignInResponse(response) {
         if (response.credential) {
-            const token = response.credential;
-            const decoded = JSON.parse(atob(token.split('.')[1]));
-            currentUser = {
-                email: decoded.email,
-                name: decoded.name,
-                picture: decoded.picture
-            };
+            try {
+                const token = response.credential;
+                const decoded = JSON.parse(atob(token.split('.')[1]));
+                currentUser = {
+                    email: decoded.email,
+                    name: decoded.name,
+                    picture: decoded.picture
+                };
 
-            console.log('✅ Usuario autenticado:', currentUser.email);
-            loadUserCartFromSheet();
-            updateUserUI();
+                console.log('✅ Usuario autenticado:', currentUser.email);
+
+                // Guardar datos de remarketing en Google Sheets
+                saveUserRemarketing();
+
+                // Cargar carrito existente del usuario
+                loadUserCartFromSheet();
+
+                // Actualizar UI
+                updateUserUI();
+            } catch (error) {
+                console.error('❌ Error al procesar respuesta de Sign-In:', error);
+            }
+        }
+    }
+
+    // Save user data for remarketing to Google Sheet
+    async function saveUserRemarketing() {
+        if (!currentUser) return;
+
+        try {
+            const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'saveUserRemarketing',
+                    email: currentUser.email,
+                    name: currentUser.name,
+                    picture: currentUser.picture,
+                    timestamp: new Date().toISOString()
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                console.log('✅ Datos de remarketing guardados para:', currentUser.email);
+            }
+        } catch (error) {
+            console.warn('⚠️ No se pudo guardar datos de remarketing:', error);
         }
     }
 
@@ -583,14 +626,14 @@
             const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getCart&email=' + encodeURIComponent(currentUser.email));
             const data = await response.json();
 
-            if (data.success && data.cart) {
+            if (data.success && data.cart && Array.isArray(data.cart)) {
                 cart = data.cart;
                 saveCart();
                 updateCartUI();
-                console.log('✅ Carrito cargado para:', currentUser.email);
+                console.log('✅ Carrito cargado para:', currentUser.email, `(${cart.length} productos)`);
             }
         } catch (error) {
-            console.warn('No se pudo cargar carrito del servidor:', error);
+            console.warn('⚠️ No se pudo cargar carrito del servidor:', error);
         }
     }
 
@@ -599,17 +642,21 @@
         if (!currentUser || cart.length === 0) return;
 
         try {
-            await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify({
                     action: 'saveCart',
                     email: currentUser.email,
-                    cart: cart
+                    cart: cart,
+                    timestamp: new Date().toISOString()
                 })
             });
-            console.log('✅ Carrito guardado para:', currentUser.email);
+            const data = await response.json();
+            if (data.success) {
+                console.log('✅ Carrito guardado para:', currentUser.email, `(${cart.length} productos)`);
+            }
         } catch (error) {
-            console.warn('No se pudo guardar carrito:', error);
+            console.warn('⚠️ No se pudo guardar carrito:', error);
         }
     }
 
@@ -618,31 +665,49 @@
         const signinDiv = document.getElementById('google-signin');
         const userInfo = document.getElementById('user-info');
 
-        if (currentUser && userInfo) {
+        if (!signinDiv || !userInfo) {
+            console.warn('⚠️ Elementos de UI no encontrados');
+            return;
+        }
+
+        if (currentUser) {
             signinDiv.style.display = 'none';
             userInfo.style.display = 'flex';
             userInfo.innerHTML = `
                 <div class="flex items-center gap-2">
-                    <img src="${currentUser.picture}" alt="${currentUser.name}" class="w-8 h-8 rounded-full">
-                    <span class="text-sm text-on-surface">${currentUser.name}</span>
-                    <button onclick="signOutUser()" class="text-xs text-secondary hover:text-primary">Cerrar sesión</button>
+                    <img src="${currentUser.picture}" alt="${currentUser.name}" class="w-8 h-8 rounded-full" onerror="this.src='https://via.placeholder.com/32'">
+                    <span class="text-sm text-on-surface">${currentUser.name.split(' ')[0]}</span>
+                    <button onclick="signOutUser()" class="text-xs text-secondary hover:text-primary transition-colors">Cerrar sesión</button>
                 </div>
             `;
-        } else if (signinDiv && userInfo) {
+            console.log('✅ UI actualizada: usuario autenticado');
+        } else {
             signinDiv.style.display = 'block';
             userInfo.style.display = 'none';
+            userInfo.innerHTML = '';
+            console.log('✅ UI actualizada: usuario desconectado');
         }
     }
 
     // Sign out
     function signOutUser() {
+        if (!currentUser) return;
+
+        // Guardar carrito antes de cerrar sesión
         saveUserCartToSheet();
+
+        // Limpiar datos del usuario
+        const email = currentUser.email;
         currentUser = null;
+
+        // Actualizar UI
+        updateUserUI();
+
+        // Limpiar carrito local (pero NO borrar del localStorage)
         cart = [];
         updateCartUI();
-        const userInfo = document.getElementById('user-info');
-        if (userInfo) userInfo.innerHTML = '';
-        console.log('✅ Sesión cerrada');
+
+        console.log('✅ Sesión cerrada para:', email);
     }
 
     // Load Products from Google Sheets or JSON fallback
