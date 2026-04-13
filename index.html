@@ -555,15 +555,22 @@
 
         // Initialize routing based on current pathname
         const route = getCurrentRoute();
-        const sectionId = routeMap[route];
-        if (sectionId) {
-            showSection(sectionId);
-        } else if (route === '/') {
-            showSection('hero');
+
+        // Handle special carrito route
+        if (route === '/carrito') {
+            showSection('hero'); // Show hero as background
+            openCheckoutModal();
         } else {
-            // Route not found, show hero as fallback
-            showSection('hero');
-            window.history.replaceState({ path: '/' }, '', '/');
+            const sectionId = routeMap[route];
+            if (sectionId) {
+                showSection(sectionId);
+            } else if (route === '/') {
+                showSection('hero');
+            } else {
+                // Route not found, show hero as fallback
+                showSection('hero');
+                window.history.replaceState({ path: '/' }, '', '/');
+            }
         }
     });
 
@@ -1179,6 +1186,10 @@
     // Close Cart
     function closeCart() {
         document.getElementById('cart-modal').classList.add('hidden');
+        // Go back to previous route if we came from /carrito
+        if (window.location.pathname === '/carrito') {
+            window.history.back();
+        }
     }
 
     // Open Checkout Modal
@@ -1195,6 +1206,10 @@
     // Close Checkout Modal
     function closeCheckoutModal() {
         document.getElementById('checkout-modal').classList.add('hidden');
+        // Go back to previous route if we came from /carrito
+        if (window.location.pathname === '/carrito') {
+            window.history.back();
+        }
     }
 
     // Render Checkout Modal
@@ -1423,6 +1438,8 @@
         // Handle special cases
         if (path === '/carrito') {
             openCheckoutModal();
+            // Update browser URL with pathname routing
+            window.history.pushState({ path }, '', path);
             return;
         }
 
