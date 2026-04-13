@@ -130,6 +130,39 @@
             box-shadow: 0 0 0 2px rgba(248, 188, 93, 0.2);
         }
 
+        /* Products Grid - Mobile Scroll */
+        @media (max-width: 768px) {
+            #products-grid {
+                display: flex;
+                flex-direction: row;
+                gap: 2rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 1rem;
+            }
+
+            #products-grid > div {
+                flex: 0 0 calc(100vw - 120px);
+                min-width: calc(100vw - 120px);
+                scroll-snap-align: start;
+            }
+        }
+
+        /* Hide scrollbar but keep functionality */
+        #products-grid::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        #products-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #products-grid::-webkit-scrollbar-thumb {
+            background: #f8bc5d;
+            border-radius: 2px;
+        }
+
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
@@ -733,17 +766,24 @@
     // Load Products from Google Sheets with fallback to JSON
     async function loadProductsFromGoogleSheets() {
         try {
-            const response = await fetch(GOOGLE_SHEET_CSV_URL);
-            if (!response.ok) throw new Error('Google Sheets request failed');
+            // Forzar actualización con cache-busting
+            const response = await fetch(GOOGLE_SHEET_CSV_URL + '?v=' + Date.now(), {
+                cache: 'no-store'
+            });
+            if (!response.ok) throw new Error('Google Sheets request failed: ' + response.status);
 
             const csvText = await response.text();
+            if (!csvText || csvText.length < 10) {
+                throw new Error('Google Sheets response empty or invalid');
+            }
             parseProductsFromCSV(csvText);
-            console.log('✅ Productos cargados desde Google Sheets');
+            console.log('✅ Productos cargados desde Google Sheets (' + products.length + ' productos)');
             renderProducts('all');
         } catch (error) {
-            console.warn('⚠️ No se pudo cargar desde Google Sheets, usando JSON local:', error.message);
+            console.warn('⚠️ No se pudo cargar desde Google Sheets:', error.message);
+            console.warn('URL intentada:', GOOGLE_SHEET_CSV_URL);
             try {
-                const response = await fetch('/products.json');
+                const response = await fetch('/products.json?v=' + Date.now());
                 const jsonData = await response.json();
                 parseProductsFromJSON(jsonData);
                 console.log('✅ Productos cargados desde JSON local (fallback)');
@@ -1059,15 +1099,21 @@
     // Scroll Products Left (Mobile Navigation)
     function scrollProductsLeft() {
         const grid = document.getElementById('products-grid');
-        const cardWidth = grid.querySelector('[data-product-id]')?.offsetWidth + 32 || 340; // Card width + gap
-        grid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        if (!grid) return;
+
+        // Scroll by viewport width minus padding
+        const scrollAmount = window.innerWidth - 120;
+        grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
 
     // Scroll Products Right (Mobile Navigation)
     function scrollProductsRight() {
         const grid = document.getElementById('products-grid');
-        const cardWidth = grid.querySelector('[data-product-id]')?.offsetWidth + 32 || 340; // Card width + gap
-        grid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        if (!grid) return;
+
+        // Scroll by viewport width minus padding
+        const scrollAmount = window.innerWidth - 120;
+        grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
 
     // Increment Quantity
