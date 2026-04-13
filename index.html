@@ -524,60 +524,45 @@
     const GOOGLE_CLIENT_ID = '354015976108-34akma2jkl50hbr603l54gut63k40m4a.apps.googleusercontent.com';
 
     // Initialize
+    let googleInitialized = false;
+
     document.addEventListener('DOMContentLoaded', () => {
         loadProductsFromGoogleSheets();
         loadCart();
         initializeHeroVideo();
-        // Dar un poco más de tiempo para que Google API cargue
-        setTimeout(() => {
-            initializeGoogleSignIn();
-        }, 500);
+        initializeGoogleSignIn();
     });
 
     // Google Sign-In initialization
-    let googleInitialized = false;
     function initializeGoogleSignIn() {
-        console.log('🔍 Intentando inicializar Google Sign-In...');
-        console.log('Google disponible:', typeof window.google !== 'undefined');
-
-        if (googleInitialized) {
-            console.log('⚠️ Google Sign-In ya fue inicializado');
-            return;
-        }
+        if (googleInitialized) return;
 
         if (typeof window.google === 'undefined') {
-            console.warn('⏳ Google API no cargado aún, reintentando en 1s...');
-            setTimeout(initializeGoogleSignIn, 1000);
+            console.log('⏳ Google API no cargado aún, reintentando...');
+            setTimeout(initializeGoogleSignIn, 500);
             return;
         }
 
         googleInitialized = true;
-        console.log('✅ Google API disponible, inicializando...');
+        console.log('✅ Google API disponible, inicializando Sign-In...');
 
         try {
             window.google.accounts.id.initialize({
                 client_id: GOOGLE_CLIENT_ID,
-                callback: handleSignInResponse
+                callback: handleSignInResponse,
+                auto_select: false
             });
-            console.log('✅ google.accounts.id.initialize() completado');
 
-            // Renderizar botón con pequeño delay
-            setTimeout(() => {
-                const signinDiv = document.getElementById('google-signin');
-                if (signinDiv) {
-                    console.log('📍 Div google-signin encontrado, renderizando botón...');
-                    window.google.accounts.id.renderButton(signinDiv, {
-                        theme: 'dark',
-                        size: 'large'
-                    });
-                    console.log('✅ Botón de Google Sign-In renderizado');
-                } else {
-                    console.error('❌ Div #google-signin no encontrado en el DOM');
-                }
-            }, 200);
+            const signinDiv = document.getElementById('google-signin');
+            if (signinDiv) {
+                window.google.accounts.id.renderButton(signinDiv, {
+                    theme: 'dark',
+                    size: 'large'
+                });
+                console.log('✅ Google Sign-In button renderizado');
+            }
         } catch (error) {
-            console.error('❌ Error al inicializar Google Sign-In:', error);
-            console.error('Stack:', error.stack);
+            console.error('❌ Error en Google Sign-In:', error);
         }
     }
 
@@ -725,28 +710,18 @@
         console.log('✅ Sesión cerrada para:', email);
     }
 
-    // Load Products from Google Sheets or JSON fallback
+    // Load Products from JSON local
     async function loadProductsFromGoogleSheets() {
         try {
-            // Intenta cargar desde Google Sheets
-            const response = await fetch(GOOGLE_SHEET_CSV_URL);
-            const csvText = await response.text();
-            parseProductsFromCSV(csvText);
-            console.log('✅ Productos cargados desde Google Sheets');
+            // Cargar desde JSON local
+            const response = await fetch('/products.json');
+            const jsonData = await response.json();
+            parseProductsFromJSON(jsonData);
+            console.log('✅ Productos cargados desde JSON local');
             renderProducts('all');
         } catch (error) {
-            console.warn('⚠️ No se pudo cargar desde Google Sheets, usando JSON local:', error);
-            try {
-                // Fallback a JSON local
-                const response = await fetch('/products.json');
-                const jsonData = await response.json();
-                parseProductsFromJSON(jsonData);
-                console.log('✅ Productos cargados desde JSON local');
-                renderProducts('all');
-            } catch (jsonError) {
-                console.error('Error al cargar productos:', jsonError);
-                alert('⚠️ Error al cargar productos.');
-            }
+            console.error('❌ Error al cargar productos:', error);
+            alert('⚠️ Error al cargar productos.');
         }
     }
 
