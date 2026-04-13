@@ -130,14 +130,6 @@
             box-shadow: 0 0 0 2px rgba(248, 188, 93, 0.2);
         }
 
-        /* Routing - Hide/Show sections */
-        main > section {
-            display: none !important;
-        }
-
-        main > section.route-active {
-            display: block !important;
-        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
@@ -553,23 +545,25 @@
         initializeHeroVideo();
         initializeGoogleSignIn();
 
-        // Initialize routing based on current pathname
-        const route = getCurrentRoute();
+        // Initialize scroll spy for routing
+        initScrollSpy();
+
+        // Handle current URL
+        const route = window.location.pathname;
 
         // Handle special carrito route
         if (route === '/carrito') {
-            showSection('hero'); // Show hero as background
             openCheckoutModal();
         } else {
             const sectionId = routeMap[route];
-            if (sectionId) {
-                showSection(sectionId);
-            } else if (route === '/') {
-                showSection('hero');
-            } else {
-                // Route not found, show hero as fallback
-                showSection('hero');
-                window.history.replaceState({ path: '/' }, '', '/');
+            if (sectionId && route !== '/') {
+                // Scroll to the section if not on home page
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    setTimeout(() => {
+                        section.scrollIntoView({ behavior: 'auto', block: 'start' });
+                    }, 100);
+                }
             }
         }
     });
@@ -1370,13 +1364,14 @@
         }
     }
 
-    // ===== CLIENT-SIDE ROUTING (Pathname-based without hash) =====
+    // ===== CLIENT-SIDE ROUTING (Pathname-based with scroll spy) =====
     //
     // URLs sin hash:
     // - https://llama-importaciones.onrender.com/
     // - https://llama-importaciones.onrender.com/categorias
     // - https://llama-importaciones.onrender.com/catalogo
     //
+    // La URL cambia automáticamente al scrollear
 
     // Route mapping to section IDs
     const routeMap = {
@@ -1391,37 +1386,18 @@
         '/carrito': null  // Special case - opens modal
     };
 
-    // Hide all sections
-    function hideAllSections() {
-        document.querySelectorAll('main > section').forEach(section => {
-            section.classList.remove('route-active');
-        });
-    }
+    // Reverse map: section ID to route
+    const sectionToRoute = {
+        'hero': '/',
+        'about': '/sobre',
+        'categories': '/categorias',
+        'catalog': '/catalogo',
+        'how-to-buy': '/como-comprar',
+        'trust': '/contacto',
+        'socials': '/redes-sociales'
+    };
 
-    // Show specific section
-    function showSection(id) {
-        hideAllSections();
-        const section = document.getElementById(id);
-        if (section) {
-            section.classList.add('route-active');
-            // Scroll to the section smoothly
-            setTimeout(() => {
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 50);
-        }
-    }
-
-    // Get current route from pathname
-    function getCurrentRoute() {
-        let path = window.location.pathname;
-        // Remove trailing slash if present (except for root)
-        if (path !== '/' && path.endsWith('/')) {
-            path = path.slice(0, -1);
-        }
-        return path;
-    }
-
-    // Main navigation function
+    // Main navigation function - scroll to section
     function navigateTo(path) {
         // Ensure path starts with /
         if (!path.startsWith('/')) {
@@ -1441,35 +1417,68 @@
         // Handle special cases
         if (path === '/carrito') {
             openCheckoutModal();
-            // Update browser URL with pathname routing
+            // Update browser URL
             window.history.pushState({ path }, '', path);
             return;
         }
 
         if (sectionId) {
-            showSection(sectionId);
-        } else if (path === '/') {
-            showSection('hero');
-        } else {
-            console.warn('Route not found:', path);
-            showSection('hero');
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Update URL first
+                window.history.pushState({ path }, '', path);
+                // Then scroll to section
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+            }
         }
+    }
 
-        // Update browser URL with pathname routing
-        window.history.pushState({ path }, '', path);
+    // Initialize Intersection Observer for scroll spy
+    function initScrollSpy() {
+        // Get all routable sections
+        const sections = Object.keys(sectionToRoute).map(id => document.getElementById(id)).filter(el => el);
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -66% 0px', // Trigger when section is in top 1/3
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    const route = sectionToRoute[sectionId];
+                    if (route) {
+                        // Update URL without reloading
+                        window.history.replaceState({ path: route }, '', route);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        sections.forEach(section => observer.observe(section));
     }
 
     // Handle browser back/forward buttons (popstate)
     window.addEventListener('popstate', (event) => {
         const path = event.state?.path || '/';
-        const sectionId = routeMap[path];
 
         if (path === '/carrito') {
             openCheckoutModal();
-        } else if (sectionId) {
-            showSection(sectionId);
         } else {
-            showSection('hero');
+            const sectionId = routeMap[path];
+            if (sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    setTimeout(() => {
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 50);
+                }
+            }
         }
     });
 
