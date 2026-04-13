@@ -493,8 +493,9 @@
 
 <!-- JavaScript for Functionality -->
 <script>
-    // Google Sheets Configuration
-    const GOOGLE_SHEET_CSV_URL = 'https://script.google.com/macros/s/AKfycbw2tzLRRQbOCYl6vSzoK0L1cR8ijSE6GyZD4S0ZD4Kge5du0Qd9Zr-49uFRrSzvcxu4/exec';
+    // Google Apps Script Configuration (Consolidated)
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzShDc_Uwxr5QZHG9_qd8vjxqXBY9jm2jp1NRkOr7Gp_iFevKEiNMRGtp1eulzjYvZ9/exec';
+    const GOOGLE_SHEET_CSV_URL = GOOGLE_APPS_SCRIPT_URL; // Usar la misma URL consolidada
 
     // Category to Icon Mapping
     const categoryIcons = {
@@ -520,7 +521,6 @@
     let cart = [];
     let currentFilter = 'all';
     let currentUser = null;
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFglbGnQmZ9L8wxr8IY8Haa_I7XKA5uYSiaRMHt8QwSyOIt9_ZL4c5s4XnCgoW2jd2/exec';
     const GOOGLE_CLIENT_ID = '354015976108-34akma2jkl50hbr603l54gut63k40m4a.apps.googleusercontent.com';
 
     // Initialize
