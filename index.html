@@ -1097,45 +1097,55 @@
     }
 
     // Scroll Products Left (Mobile Navigation)
-    function scrollProductsLeft() {
+    window.scrollProductsLeft = function() {
         const grid = document.getElementById('products-grid');
-        if (!grid) return;
-
+        if (!grid) {
+            console.warn('Grid not found');
+            return;
+        }
         // Scroll by viewport width minus padding
         const scrollAmount = window.innerWidth - 120;
         grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    }
+        console.log('Scrolling left by', scrollAmount);
+    };
 
     // Scroll Products Right (Mobile Navigation)
-    function scrollProductsRight() {
+    window.scrollProductsRight = function() {
         const grid = document.getElementById('products-grid');
-        if (!grid) return;
-
+        if (!grid) {
+            console.warn('Grid not found');
+            return;
+        }
         // Scroll by viewport width minus padding
         const scrollAmount = window.innerWidth - 120;
         grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+        console.log('Scrolling right by', scrollAmount);
+    };
 
     // Increment Quantity
-    function incrementQuantity(inputId, maxStock) {
+    window.incrementQuantity = function(inputId, maxStock) {
         const input = document.getElementById(inputId);
-        let value = parseInt(input.value) || 1;
-        if (value < maxStock) {
-            input.value = value + 1;
+        if (input) {
+            let value = parseInt(input.value) || 1;
+            if (value < maxStock) {
+                input.value = value + 1;
+            }
         }
-    }
+    };
 
     // Decrement Quantity
-    function decrementQuantity(inputId) {
+    window.decrementQuantity = function(inputId) {
         const input = document.getElementById(inputId);
-        let value = parseInt(input.value) || 1;
-        if (value > 1) {
-            input.value = value - 1;
+        if (input) {
+            let value = parseInt(input.value) || 1;
+            if (value > 1) {
+                input.value = value - 1;
+            }
         }
-    }
+    };
 
     // Add to Cart
-    function addToCart(productId) {
+    window.addToCart = function(productId) {
         const quantity = parseInt(document.getElementById(`qty-${productId}`).value);
         const product = products.find(p => p.id === productId);
 
