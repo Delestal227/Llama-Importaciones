@@ -670,7 +670,7 @@
 
             // Renderizar galería de imágenes o video
             let mediaContent = '';
-            if ((product.videoUrl || product.images.length > 0)) {
+            if (product.mediaUrls && product.mediaUrls.length > 0) {
                 mediaContent = renderMediaCarousel(product);
             } else {
                 mediaContent = `<span class="material-symbols-outlined text-secondary text-8xl">${product.icon}</span>`;
