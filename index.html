@@ -493,9 +493,9 @@
 
 <!-- JavaScript for Functionality -->
 <script>
-    // Google Apps Script Configuration
-    const GOOGLE_SHEET_CSV_URL = 'https://script.google.com/macros/s/AKfycbw2tzLRRQbOCYl6vSzoK0L1cR8ijSE6GyZD4S0ZD4Kge5du0Qd9Zr-49uFRrSzvcxu4/exec'; // Para productos (CSV)
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyjrw-idS_r8rlJ6cfVujgk--6MroMVK4Fj6jzSbO6FAXUm1lBYfk_BWeXgatXSuTfV/exec'; // Para carritos y remarketing
+    // Google Apps Script Configuration (Single URL - All operations)
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBn7cigidJnpCQyMn0BTEPatzW7aZPEwVXn-A9JtBtRJwHzGsM6oPGQPArzSoaQicL/exec';
+    const GOOGLE_SHEET_CSV_URL = GOOGLE_APPS_SCRIPT_URL; // Usa la misma URL para productos
 
     // Category to Icon Mapping
     const categoryIcons = {
@@ -710,18 +710,27 @@
         console.log('✅ Sesión cerrada para:', email);
     }
 
-    // Load Products from JSON local
+    // Load Products from Google Sheets with fallback to JSON
     async function loadProductsFromGoogleSheets() {
         try {
-            // Cargar desde JSON local
-            const response = await fetch('/products.json');
-            const jsonData = await response.json();
-            parseProductsFromJSON(jsonData);
-            console.log('✅ Productos cargados desde JSON local');
+            const response = await fetch(GOOGLE_SHEET_CSV_URL);
+            if (!response.ok) throw new Error('Google Sheets request failed');
+
+            const csvText = await response.text();
+            parseProductsFromCSV(csvText);
+            console.log('✅ Productos cargados desde Google Sheets');
             renderProducts('all');
         } catch (error) {
-            console.error('❌ Error al cargar productos:', error);
-            alert('⚠️ Error al cargar productos.');
+            console.warn('⚠️ No se pudo cargar desde Google Sheets, usando JSON local:', error.message);
+            try {
+                const response = await fetch('/products.json');
+                const jsonData = await response.json();
+                parseProductsFromJSON(jsonData);
+                console.log('✅ Productos cargados desde JSON local (fallback)');
+                renderProducts('all');
+            } catch (jsonError) {
+                console.error('❌ Error al cargar productos:', jsonError);
+            }
         }
     }
 
