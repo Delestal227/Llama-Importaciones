@@ -959,6 +959,20 @@
         });
     }
 
+    // Convertir URL de Google Drive compartida a URL directa
+    function convertGoogleDriveUrl(url) {
+        if (!url) return url;
+
+        // Detectar si es URL de Google Drive
+        if (url.includes('drive.google.com')) {
+            const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+            if (match && match[1]) {
+                return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+            }
+        }
+        return url;
+    }
+
     // Detectar si una URL es video o imagen
     function isVideoUrl(url) {
         if (!url) return false;
@@ -984,9 +998,11 @@
                     });
                 }
             } else {
+                // Convertir URLs de Google Drive a URLs directas
+                const directUrl = convertGoogleDriveUrl(url);
                 media.push({
                     type: 'image',
-                    src: url,
+                    src: directUrl,
                     alt: product.name
                 });
             }
