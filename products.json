@@ -1,0 +1,32 @@
+[
+  {
+    "producto": "Vajilla Premium",
+    "stock": 1,
+    "sku": "LLAMA-VAJ-001",
+    "categoria": "Bazar & Cocina",
+    "precioCompra": 100,
+    "precioVenta": 300,
+    "descripcion": "Vajilla Premium",
+    "imagenes": ["https://via.placeholder.com/400"]
+  },
+  {
+    "producto": "Juego de Ollas",
+    "stock": 0,
+    "sku": "LLAMA-OLL-001",
+    "categoria": "Bazar & Cocina",
+    "precioCompra": 23,
+    "precioVenta": 69,
+    "descripcion": "Juego de Ollas",
+    "imagenes": ["https://via.placeholder.com/401"]
+  },
+  {
+    "producto": "Auriculares Bluetooth",
+    "stock": 4,
+    "sku": "LLAMA-AUR-001",
+    "categoria": "Electrónica",
+    "precioCompra": 45,
+    "precioVenta": 135,
+    "descripcion": "Auriculares Bluetooth",
+    "imagenes": ["https://via.placeholder.com/402"]
+  }
+]

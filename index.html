@@ -526,17 +526,49 @@
         initializeHeroVideo();
     });
 
-    // Load Products from Google Sheets
+    // Load Products from Google Sheets or JSON fallback
     async function loadProductsFromGoogleSheets() {
         try {
+            // Intenta cargar desde Google Sheets
             const response = await fetch(GOOGLE_SHEET_CSV_URL);
             const csvText = await response.text();
             parseProductsFromCSV(csvText);
+            console.log('✅ Productos cargados desde Google Sheets');
             renderProducts('all');
         } catch (error) {
-            console.error('Error loading products from Google Sheets:', error);
-            alert('⚠️ Error al cargar productos. Verifica la conexión a Google Sheets.');
+            console.warn('⚠️ No se pudo cargar desde Google Sheets, usando JSON local:', error);
+            try {
+                // Fallback a JSON local
+                const response = await fetch('/products.json');
+                const jsonData = await response.json();
+                parseProductsFromJSON(jsonData);
+                console.log('✅ Productos cargados desde JSON local');
+                renderProducts('all');
+            } catch (jsonError) {
+                console.error('Error al cargar productos:', jsonError);
+                alert('⚠️ Error al cargar productos.');
+            }
         }
+    }
+
+    // Parse products from JSON
+    function parseProductsFromJSON(jsonData) {
+        products = [];
+        jsonData.forEach((item, idx) => {
+            const product = {
+                id: idx + 1,
+                sku: item.sku,
+                name: item.producto,
+                price: parseInt(item.precioVenta) || 0,
+                stock: parseInt(item.stock) || 0,
+                category: categorySlug[item.categoria] || 'varios',
+                icon: categoryIcons[item.categoria] || 'category',
+                description: item.descripcion || '',
+                mediaUrls: item.imagenes || []
+            };
+            products.push(product);
+        });
+        console.log(`✅ ${products.length} productos parseados desde JSON`);
     }
 
     // Parse CSV with proper quote handling
