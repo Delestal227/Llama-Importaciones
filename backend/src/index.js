@@ -10,7 +10,21 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Security
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com"],
+            imgSrc: ["'self'", "data:", "https://res.cloudinary.com", "https://*.cloudinary.com"],
+            connectSrc: ["'self'"],
+            mediaSrc: ["'self'", "https://res.cloudinary.com", "https://*.cloudinary.com"],
+            frameSrc: ["'none'"],
+        },
+    },
+    crossOriginEmbedderPolicy: false,
+}));
 app.use(cors({
     origin: process.env.FRONTEND_URL || '*',
     credentials: true
