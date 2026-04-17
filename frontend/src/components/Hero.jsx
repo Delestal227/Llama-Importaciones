@@ -27,8 +27,8 @@ const Hero = () => {
           </span>
           
           <h1 className="font-bebas text-7xl md:text-9xl text-white tracking-widest leading-none">
-            ESTILO QUE <br /> 
-            <span className="text-primary italic">CONECTA</span>
+            PRODUCTOS IMPORTADOS <br /> 
+            <span className="text-primary italic">CON DISEÑO</span>
           </h1>
 
           <p className="font-jakarta text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">

@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import CategoryFilters from './components/CategoryFilters';
 import ProductGrid from './components/ProductGrid';
 import Cart from './components/Cart';
+import ProductModal from './components/ProductModal';
 import { getProducts } from './services/api';
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [category, setCategory] = useState('all');
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [favorites, setFavorites] = useState([]);
 
   // Load products on mount and when category changes
   useEffect(() => {
@@ -42,6 +45,17 @@ function App() {
     localStorage.setItem('llama-cart-v2', JSON.stringify(cart));
   }, [cart]);
 
+  // Load favorites from localStorage
+  useEffect(() => {
+    const savedFavs = localStorage.getItem('llama-favorites');
+    if (savedFavs) setFavorites(JSON.parse(savedFavs));
+  }, []);
+
+  // Sync favorites to localStorage
+  useEffect(() => {
+    localStorage.setItem('llama-favorites', JSON.stringify(favorites));
+  }, [favorites]);
+
   const handleAddToCart = (product) => {
     setCart(prev => {
       const existing = prev.find(item => item.id === product.id);
@@ -52,7 +66,16 @@ function App() {
       }
       return [...prev, { ...product, quantity: 1 }];
     });
-    // Optional: Open cart drawer or show notification
+    // Auto-open cart for feedback
+    setIsCartOpen(true);
+  };
+
+  const handleToggleFavorite = (productId) => {
+    setFavorites(prev => 
+      prev.includes(productId) 
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId]
+    );
   };
 
   const handleUpdateQuantity = (productId, newQuantity) => {
@@ -104,6 +127,9 @@ function App() {
               <ProductGrid 
                 products={products} 
                 onAddToCart={handleAddToCart}
+                onViewProduct={setSelectedProduct}
+                onToggleFavorite={handleToggleFavorite}
+                favorites={favorites}
               />
             )}
           </div>
@@ -154,6 +180,15 @@ function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemove={handleRemoveFromCart}
         onCheckout={handleCheckout}
+      />
+
+      <ProductModal 
+        product={selectedProduct}
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={handleAddToCart}
+        isFavorite={selectedProduct && favorites.includes(selectedProduct.id)}
+        onToggleFavorite={handleToggleFavorite}
       />
     </div>
   );

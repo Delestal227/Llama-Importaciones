@@ -5,6 +5,3 @@ Disallow: /.git/
 Disallow: /.claude/
 
 Sitemap: https://llama-importaciones.onrender.com/sitemap.xml
-
-# Crawl delay en segundos (opcional)
-Crawl-delay: 1

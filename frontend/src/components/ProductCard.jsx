@@ -2,7 +2,7 @@ import React from 'react';
 import { ShoppingCart, Heart, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart, onView, onToggleFavorite, isFavorite }) => {
   const isAgotado = product.stock === 0 && product.sku;
   const isConsultar = product.stock === 0 && !product.sku;
   
@@ -22,7 +22,7 @@ const ProductCard = ({ product, onAddToCart }) => {
         {/* Badges */}
         <div className="absolute top-4 left-4 flex flex-col gap-2">
           {product.stock < 5 && product.stock > 0 && (
-            <span className="bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">
+            <span className="bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg">
               Últimas {product.stock} u.
             </span>
           )}
@@ -34,12 +34,24 @@ const ProductCard = ({ product, onAddToCart }) => {
         </div>
 
         {/* Quick Actions overlay */}
-        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-          <button className="p-3 bg-white rounded-full shadow-lg hover:bg-primary hover:text-white transition-all transform scale-90 group-hover:scale-100 duration-300">
-            <Eye size={20} />
+        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+          <button 
+            onClick={(e) => { e.stopPropagation(); onView(); }}
+            className="p-4 bg-white rounded-full shadow-xl hover:bg-primary hover:text-white transition-all transform scale-90 group-hover:scale-100 duration-300"
+            title="Visualizar"
+          >
+            <Eye size={22} />
           </button>
-          <button className="p-3 bg-white rounded-full shadow-lg hover:bg-primary hover:text-white transition-all transform scale-90 delay-75 group-hover:scale-100 duration-300">
-            <Heart size={20} />
+          <button 
+            onClick={(e) => { e.stopPropagation(); onToggleFavorite(); }}
+            className={`p-4 rounded-full shadow-xl transition-all transform scale-90 delay-75 group-hover:scale-100 duration-300 ${
+              isFavorite 
+              ? 'bg-red-500 text-white' 
+              : 'bg-white text-brand-charcoal hover:bg-primary hover:text-white'
+            }`}
+            title={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+          >
+            <Heart size={22} className={isFavorite ? 'fill-current' : ''} />
           </button>
         </div>
       </div>
@@ -47,39 +59,47 @@ const ProductCard = ({ product, onAddToCart }) => {
       {/* Info Container */}
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
-          <div>
+          <div className="w-full">
             <p className="text-[10px] font-bold text-primary tracking-[0.2em] uppercase mb-1">
               {product.category || 'VARIOS'}
             </p>
-            <h3 className="font-bebas text-2xl text-brand-charcoal tracking-wide leading-tight group-hover:text-primary transition-colors">
+            <h3 className="font-bebas text-2xl text-brand-charcoal tracking-wide leading-tight group-hover:text-primary transition-colors line-clamp-1">
               {product.name}
             </h3>
           </div>
         </div>
 
-        <p className="text-brand-muted text-xs line-clamp-2 mb-4 font-light leading-relaxed">
+        <p className="text-brand-muted text-xs line-clamp-2 mb-4 font-light leading-relaxed min-h-[32px]">
           {product.description || 'Producto importado de alta calidad seleccionado especialmente.'}
         </p>
 
-        <div className="flex items-end justify-between pt-4 border-t border-surface-200">
-          <div>
-            <p className="text-[10px] text-brand-muted font-bold uppercase tracking-widest mb-1">Precio</p>
-            <p className="font-bebas text-3xl text-brand-charcoal">
-              ${product.price?.toLocaleString()}
-            </p>
+        <div className="pt-4 border-t border-surface-200">
+          <div className="flex justify-between items-end mb-4">
+            <div>
+              <p className="text-[10px] text-brand-muted font-bold uppercase tracking-widest mb-1">Precio</p>
+              <p className="font-bebas text-4xl text-brand-charcoal leading-none">
+                ${product.price?.toLocaleString()}
+              </p>
+            </div>
+            {product.stock > 0 && (
+              <p className="text-[10px] text-green-600 font-bold bg-green-50 px-2 py-1 rounded-md">DISPONIBLE</p>
+            )}
           </div>
           
           <button 
-            onClick={() => onAddToCart(product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart(product);
+            }}
             disabled={isAgotado}
-            className={`flex items-center gap-2 p-3 rounded-xl transition-all duration-300 ${
+            className={`w-full flex items-center justify-center gap-3 py-4 rounded-2xl transition-all duration-300 font-bebas text-xl tracking-widest ${
               isAgotado 
               ? 'bg-surface-300 text-brand-muted cursor-not-allowed' 
-              : 'bg-primary/10 text-primary hover:bg-primary hover:text-white shadow-sm hover:shadow-lg'
+              : 'bg-primary/10 text-primary hover:bg-primary hover:text-white shadow-sm hover:shadow-primary/20'
             }`}
           >
             <ShoppingCart size={20} />
-            <span className="font-bebas text-lg tracking-wider px-1">AGREGAR</span>
+            AGREGAR AL CARRITO
           </button>
         </div>
       </div>
