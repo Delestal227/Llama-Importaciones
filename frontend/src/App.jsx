@@ -145,21 +145,6 @@ function App() {
               <p className="font-jakarta text-white/50 text-xl leading-relaxed italic">
                 "No traemos todo, traemos lo mejor. En Llama nos obsesionamos con el criterio: cada objeto importado responde a una necesidad real con un diseño excepcional."
               </p>
-              <div className="pt-8 flex justify-center">
-                <div className="flex -space-x-4">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="w-16 h-16 rounded-full border-4 border-brand-charcoal glass overflow-hidden">
-                      <img src={`https://i.pravatar.cc/100?u=${i+10}`} alt="User" />
-                    </div>
-                  ))}
-                  <div className="w-16 h-16 rounded-full border-4 border-brand-charcoal bg-primary flex items-center justify-center font-bold text-sm">
-                    +1k
-                  </div>
-                </div>
-              </div>
-              <p className="text-xs tracking-[0.3em] font-bold text-white/30 uppercase">
-                Clientes satisfechos en todo el país
-              </p>
             </div>
           </div>
         </section>
