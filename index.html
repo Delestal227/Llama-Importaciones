@@ -168,13 +168,13 @@
 <body class="antialiased overflow-x-hidden w-screen">
 
 <!-- Shared Navigation -->
-<header class="bg-[#8B5A3C] docked full-width top-0 sticky z-50 transition-colors duration-300 border-b border-[#F2EDE8]/20">
-    <nav class="flex justify-between items-center w-full px-3 sm:px-4 md:px-8 py-2 sm:py-3 md:py-5 max-w-screen-2xl mx-auto gap-2 sm:gap-4">
+<header class="bg-[#8B5A3C]/95 backdrop-blur-md full-width top-0 sticky z-50 transition-all duration-300 border-b border-[#F2EDE8]/10 shadow-lg">
+    <nav class="flex justify-between items-center w-full px-4 md:px-8 py-3 md:py-5 max-w-screen-2xl mx-auto gap-3">
         <!-- Left: Logo -->
-        <div class="text-sm sm:text-lg md:text-3xl font-bebas tracking-tight text-[#F2EDE8] font-bold flex-shrink-0 whitespace-nowrap">LLAMA <br class="sm:hidden"/>IMPORTACIONES</div>
+        <a href="#hero" class="text-base md:text-3xl font-bebas tracking-tight text-[#F2EDE8] font-bold flex-shrink-0 whitespace-nowrap hover:text-secondary transition-colors duration-300">LLAMA IMPORTACIONES</a>
 
         <!-- Center: Navigation (hidden on mobile) -->
-        <div class="hidden md:flex items-center gap-x-8 flex-1 justify-center">
+        <div class="hidden lg:flex items-center gap-x-8 flex-1 justify-center">
             <a href="#hero" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Inicio</a>
             <a href="#about" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Sobre</a>
             <a href="#categories" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Categorias</a>
@@ -183,16 +183,33 @@
             <a href="#trust" class="text-[#F2EDE8] opacity-90 font-michroma text-xs tracking-[0.12em] uppercase hover:text-secondary transition-colors duration-300">Contacto</a>
         </div>
 
-        <!-- Right: Auth & Cart -->
+        <!-- Right: Auth, Cart & Mobile Menu -->
         <div class="flex items-center gap-2 md:gap-4 flex-shrink-0">
-            <div id="google-signin" style="display: block;"></div>
+            <div id="google-signin" class="hidden md:block" style="display: block;"></div>
             <div id="user-info" class="hidden flex items-center gap-3"></div>
-            <button onclick="openCheckoutModal()" class="relative bg-secondary text-[#B36843] px-4 md:px-8 py-2 md:py-3 rounded-lg font-bebas text-sm md:text-lg tracking-widest hover:bg-[#F2EDE8] transition-transform active:scale-95 uppercase flex items-center gap-1 md:gap-2">
+            <button onclick="openCart()" class="relative bg-secondary text-[#B36843] px-3 md:px-6 py-2 md:py-3 rounded-lg font-bebas text-sm md:text-base tracking-widest hover:bg-[#F2EDE8] transition-all duration-300 active:scale-95 uppercase flex items-center gap-1 md:gap-2 shadow-md">
                 🛒 <span class="hidden md:inline">CARRITO</span>
-                <span id="header-cart-count" class="absolute -top-3 -right-3 bg-[#B36843] text-secondary text-xs font-bebas px-2.5 py-1 rounded-full hidden font-bold">0</span>
+                <span id="header-cart-count" class="absolute -top-2 -right-2 bg-[#B36843] text-secondary text-[10px] font-bebas min-w-[22px] h-[22px] rounded-full hidden font-bold flex items-center justify-center shadow-md animate-bounce">0</span>
+            </button>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden text-[#F2EDE8] hover:text-secondary transition-colors p-1">
+                <span class="material-symbols-outlined text-3xl" id="menu-icon">menu</span>
             </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-[#8B5A3C] border-t border-[#F2EDE8]/10 shadow-xl">
+        <div class="flex flex-col py-4 px-6 space-y-4">
+            <a href="#hero" onclick="closeMobileMenu()" class="text-[#F2EDE8] font-michroma text-sm tracking-[0.12em] uppercase hover:text-secondary transition-colors py-2 border-b border-[#F2EDE8]/10">Inicio</a>
+            <a href="#about" onclick="closeMobileMenu()" class="text-[#F2EDE8] font-michroma text-sm tracking-[0.12em] uppercase hover:text-secondary transition-colors py-2 border-b border-[#F2EDE8]/10">Sobre</a>
+            <a href="#categories" onclick="closeMobileMenu()" class="text-[#F2EDE8] font-michroma text-sm tracking-[0.12em] uppercase hover:text-secondary transition-colors py-2 border-b border-[#F2EDE8]/10">Categorias</a>
+            <a href="#catalog" onclick="closeMobileMenu()" class="text-[#F2EDE8] font-michroma text-sm tracking-[0.12em] uppercase hover:text-secondary transition-colors py-2 border-b border-[#F2EDE8]/10">Catalogo</a>
+            <a href="#socials" onclick="closeMobileMenu()" class="text-[#F2EDE8] font-michroma text-sm tracking-[0.12em] uppercase hover:text-secondary transition-colors py-2 border-b border-[#F2EDE8]/10">Redes Sociales</a>
+            <a href="#trust" onclick="closeMobileMenu()" class="text-[#F2EDE8] font-michroma text-sm tracking-[0.12em] uppercase hover:text-secondary transition-colors py-2">Contacto</a>
+            <div id="google-signin-mobile" class="pt-2"></div>
+        </div>
+    </div>
 </header>
 
 <main>
@@ -261,20 +278,28 @@
             </div>
 
             <!-- Filter Buttons -->
-            <div class="flex flex-wrap gap-4 mb-12">
+            <div class="flex flex-wrap gap-4 mb-8">
                 <button onclick="filterProducts('all')" data-category="all" class="filter-btn active bg-secondary text-[#B36843] px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-[#F2EDE8] transition-all duration-300">TODOS</button>
                 <button onclick="filterProducts('bazar')" data-category="bazar" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">BAZAR & COCINA</button>
                 <button onclick="filterProducts('electronica')" data-category="electronica" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">ELECTRÓNICA</button>
                 <button onclick="filterProducts('hogar')" data-category="hogar" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">HOGAR</button>
                 <button onclick="filterProducts('cuidado')" data-category="cuidado" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">CUIDADO PERSONAL</button>
                 <button onclick="filterProducts('tecnologia')" data-category="tecnologia" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">TECNOLOGÍA</button>
+                <button onclick="filterProducts('varios')" data-category="varios" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">VARIOS</button>
             </div>
+            <!-- Product count -->
+            <p id="product-count" class="font-michroma text-[10px] tracking-[0.15em] text-secondary mb-8"></p>
 
             <!-- Products Grid with Mobile Navigation -->
             <div class="relative">
                 <!-- Products Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible scroll-smooth" id="products-grid" style="scroll-behavior: smooth;">
                     <!-- Products will be rendered here by JavaScript -->
+                </div>
+                <!-- Load More Button -->
+                <div id="load-more-container" class="hidden text-center mt-12">
+                    <button onclick="loadMoreProducts()" class="bg-secondary text-[#B36843] px-12 py-4 rounded-lg font-bebas text-2xl tracking-widest hover:bg-[#F2EDE8] transition-all duration-300 shadow-lg">VER MÁS PRODUCTOS</button>
+                    <p id="load-more-count" class="font-michroma text-[10px] tracking-[0.15em] text-secondary mt-3"></p>
                 </div>
             </div>
         </div>
@@ -573,6 +598,8 @@
     let products = [];
     let cart = [];
     let currentFilter = 'all';
+    let productsPerPage = 18;
+    let currentPage = 1;
     let currentUser = null;
     const GOOGLE_CLIENT_ID = '354015976108-34akma2jkl50hbr603l54gut63k40m4a.apps.googleusercontent.com';
 
@@ -592,6 +619,49 @@
         initializeHeroVideo();
         initializeGoogleSignIn();
     });
+
+    // Mobile Menu Toggle
+    window.toggleMobileMenu = function() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            icon.textContent = 'close';
+        } else {
+            menu.classList.add('hidden');
+            icon.textContent = 'menu';
+        }
+    };
+
+    window.closeMobileMenu = function() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        menu.classList.add('hidden');
+        icon.textContent = 'menu';
+    };
+
+    // Show toast notification
+    window.showToast = function(message, type = 'success') {
+        const toast = document.createElement('div');
+        const bgColor = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : 'bg-secondary';
+        const textColor = type === 'success' || type === 'error' ? 'text-white' : 'text-[#B36843]';
+
+        toast.className = `fixed top-24 left-1/2 transform -translate-x-1/2 ${bgColor} ${textColor} px-6 py-3 rounded-lg font-bebas text-base tracking-wider shadow-xl z-[60] opacity-0 transition-all duration-300`;
+        toast.style.translate = '-50% -20px';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.translate = '-50% 0';
+        }, 10);
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.translate = '-50% -20px';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    };
 
     // Prevent browser from restoring scroll position
     if ('scrollRestoration' in window.history) {
@@ -917,63 +987,101 @@
         }
     }
 
-    // Render Products
+    // Render Products with pagination
     function renderProducts(category) {
         const grid = document.getElementById('products-grid');
         grid.innerHTML = '';
+        currentPage = 1;
 
         const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+        
+        // Update product count
+        const countEl = document.getElementById('product-count');
+        if (countEl) countEl.textContent = `${filtered.length} PRODUCTOS ENCONTRADOS`;
 
-        filtered.forEach(product => {
-            const card = document.createElement('div');
-            card.className = 'product-card group';
+        const toShow = filtered.slice(0, productsPerPage);
+        toShow.forEach(product => appendProductCard(grid, product));
+        
+        updateLoadMoreButton(filtered);
+    }
 
-            // Renderizar galería de imágenes o video
-            let mediaContent = '';
-            if (product.mediaUrls && product.mediaUrls.length > 0) {
-                mediaContent = renderMediaCarousel(product);
-            } else {
-                mediaContent = `<span class="material-symbols-outlined text-secondary text-8xl">${product.icon}</span>`;
-            }
+    function loadMoreProducts() {
+        const grid = document.getElementById('products-grid');
+        currentPage++;
+        const filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
+        const start = (currentPage - 1) * productsPerPage;
+        const toShow = filtered.slice(start, start + productsPerPage);
+        toShow.forEach(product => appendProductCard(grid, product));
+        updateLoadMoreButton(filtered);
+    }
 
-            const isOutOfStock = product.stock === 0;
-            const stockText = product.stock > 0 ? `${product.stock} Unidades Disponibles` : 'AGOTADO';
-            const stockColor = product.stock > 0 ? 'text-secondary' : 'text-red-400';
+    function updateLoadMoreButton(filtered) {
+        const container = document.getElementById('load-more-container');
+        const countEl = document.getElementById('load-more-count');
+        const shown = Math.min(currentPage * productsPerPage, filtered.length);
+        if (shown < filtered.length) {
+            container.classList.remove('hidden');
+            countEl.textContent = `MOSTRANDO ${shown} DE ${filtered.length}`;
+        } else {
+            container.classList.add('hidden');
+        }
+    }
 
-            card.setAttribute('data-product-id', product.id);
-            card.innerHTML = `
-                <div class="bg-surface-container-high rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 ${isOutOfStock ? 'opacity-60' : ''}">
-                    <div class="relative h-64 bg-surface-container-highest flex items-center justify-center overflow-hidden">
-                        ${mediaContent}
-                        ${isOutOfStock ? '<div class="absolute inset-0 bg-black/50 flex items-center justify-center"><p class="font-bebas text-2xl text-white">AGOTADO</p></div>' : ''}
+    function appendProductCard(grid, product) {
+        const card = document.createElement('div');
+        card.className = 'product-card group';
+        
+        // Use product.id as identifier since many imported products have no SKU
+        const productKey = product.sku || `id-${product.id}`;
+
+        // Renderizar galería de imágenes o video
+        let mediaContent = '';
+        if (product.mediaUrls && product.mediaUrls.length > 0) {
+            mediaContent = renderMediaCarousel(product);
+        } else {
+            mediaContent = `<span class="material-symbols-outlined text-secondary text-8xl">${product.icon}</span>`;
+        }
+
+        // For imported products with stock=0, show "Consultar" instead of "AGOTADO"
+        const hasRealStock = product.stock > 0;
+        const isImportedNoStock = product.stock === 0 && !product.sku;
+        const stockText = hasRealStock ? `${product.stock} Disponibles` : (isImportedNoStock ? 'Consultar Stock' : 'AGOTADO');
+        const stockColor = hasRealStock ? 'text-secondary' : (isImportedNoStock ? 'text-secondary/70' : 'text-red-400');
+        const canAddToCart = hasRealStock || isImportedNoStock;
+        const skuDisplay = product.sku ? `SKU: ${product.sku}` : '';
+
+        card.setAttribute('data-product-id', product.id);
+        card.innerHTML = `
+            <div class="bg-surface-container-high rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
+                <div class="relative h-64 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+                    ${mediaContent}
+                </div>
+                <div class="p-6 space-y-4">
+                    <div>
+                        ${skuDisplay ? `<p class="font-michroma text-[9px] text-secondary tracking-wider uppercase mb-1">${skuDisplay}</p>` : ''}
+                        <h3 class="font-bebas text-2xl text-on-surface">${product.name}</h3>
+                        ${product.description ? `<p class="font-body text-sm text-on-surface opacity-80 mt-2">${product.description}</p>` : ''}
                     </div>
-                    <div class="p-6 space-y-4">
-                        <div>
-                            <p class="font-michroma text-[9px] text-secondary tracking-wider uppercase mb-1">SKU: ${product.sku}</p>
-                            <h3 class="font-bebas text-2xl text-on-surface">${product.name}</h3>
-                            <p class="font-body text-sm text-on-surface opacity-80 mt-2">${product.description}</p>
+                    <div class="border-t border-surface-container-highest pt-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-bebas text-2xl text-secondary">${product.price > 0 ? '$' + product.price.toLocaleString() : 'CONSULTAR'}</span>
+                            <span class="font-michroma text-[10px] ${stockColor} tracking-wider">${stockText}</span>
                         </div>
-                        <div class="border-t border-surface-container-highest pt-4">
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="font-bebas text-2xl text-secondary">$${product.price.toLocaleString()}</span>
-                                <span class="font-michroma text-[10px] ${stockColor} tracking-wider">${stockText}</span>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex gap-2 items-center justify-between">
+                                <button onclick="window.decrementQuantity('qty-${productKey}')" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all">−</button>
+                                <input type="number" min="1" ${hasRealStock ? `max="${product.stock}"` : ''} value="1" id="qty-${productKey}" class="flex-1 mx-2 bg-surface-container-highest text-on-surface px-3 py-2 rounded text-center font-body border border-surface-container-high">
+                                <button onclick="window.incrementQuantity('qty-${productKey}', ${hasRealStock ? product.stock : 999})" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all">+</button>
                             </div>
-                            <div class="flex flex-col gap-3">
-                                <div class="flex gap-2 items-center justify-between">
-                                    <button onclick="window.decrementQuantity(\`qty-${product.sku}\`)" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>−</button>
-                                    <input type="number" min="1" max="${product.stock}" value="1" id="qty-${product.sku}" class="flex-1 mx-2 bg-surface-container-highest text-on-surface px-3 py-2 rounded text-center font-body border border-surface-container-high" ${isOutOfStock ? 'disabled' : ''}>
-                                    <button onclick="window.incrementQuantity(\`qty-${product.sku}\`, ${product.stock})" class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-bebas text-lg transition-all" ${isOutOfStock ? 'disabled' : ''}>+</button>
-                                </div>
-                                <button onclick="window.addToCart(\`${product.sku}\`)" class="w-full ${isOutOfStock ? 'bg-gray-600 cursor-not-allowed' : 'bg-secondary hover:bg-[#F2EDE8]'} text-[#B36843] px-4 py-3 rounded-lg font-bebas text-sm tracking-wider transition-all" ${isOutOfStock ? 'disabled' : ''}>
-                                    ${isOutOfStock ? 'AGOTADO' : 'AGREGAR'}
-                                </button>
-                            </div>
+                            <button onclick="window.addToCart('${productKey}')" class="w-full bg-secondary hover:bg-[#F2EDE8] text-[#B36843] px-4 py-3 rounded-lg font-bebas text-sm tracking-wider transition-all">
+                                AGREGAR
+                            </button>
                         </div>
                     </div>
                 </div>
-            `;
-            grid.appendChild(card);
-        });
+            </div>
+        `;
+        grid.appendChild(card);
     }
 
     // Convertir URL de Google Drive compartida a URL directa
@@ -1198,17 +1306,23 @@
 
     // Add to Cart
     window.addToCart = function(productIdentifier) {
-        // Can accept either SKU or ID
-        const quantity = parseInt(document.getElementById(`qty-${productIdentifier}`).value);
-        const product = products.find(p => p.sku === productIdentifier || p.id === productIdentifier);
+        // Can accept SKU, id-N format, or raw ID
+        const qtyEl = document.getElementById(`qty-${productIdentifier}`);
+        const quantity = qtyEl ? parseInt(qtyEl.value) || 1 : 1;
+        const product = products.find(p => {
+            if (p.sku && p.sku === productIdentifier) return true;
+            if (productIdentifier.startsWith('id-') && p.id === parseInt(productIdentifier.replace('id-', ''))) return true;
+            return p.id === productIdentifier;
+        });
 
-        // Validar stock disponible
-        if (product.stock === 0) {
+        // Validar stock disponible (imported products with stock=0 and no SKU can still be added)
+        const isImportedNoStock = product.stock === 0 && !product.sku;
+        if (product.stock === 0 && !isImportedNoStock) {
             alert(`❌ ${product.name} está agotado.`);
             return;
         }
 
-        if (quantity > product.stock) {
+        if (product.stock > 0 && quantity > product.stock) {
             alert(`❌ Solo hay ${product.stock} unidades disponibles de ${product.name}`);
             return;
         }
@@ -1259,16 +1373,14 @@
         const cartAction = document.getElementById('cart-action');
 
         if (cart.length === 0) {
-            cartCount.classList.add('hidden');
-            headerCartCount.classList.add('hidden');
-            emptyMessage.classList.remove('hidden');
-            cartAction.classList.add('hidden');
+            if (cartCount) cartCount.classList.add('hidden');
+            if (headerCartCount) headerCartCount.classList.add('hidden');
+            if (emptyMessage) emptyMessage.classList.remove('hidden');
+            if (cartAction) cartAction.classList.add('hidden');
         } else {
-            cartCount.textContent = cart.length;
-            headerCartCount.textContent = cart.length;
-            cartCount.classList.remove('hidden');
-            headerCartCount.classList.remove('hidden');
-            emptyMessage.classList.add('hidden');
+            if (cartCount) { cartCount.textContent = cart.length; cartCount.classList.remove('hidden'); }
+            if (headerCartCount) { headerCartCount.textContent = cart.length; headerCartCount.classList.remove('hidden'); }
+            if (emptyMessage) emptyMessage.classList.add('hidden');
             cartAction.classList.remove('hidden');
 
             cartItems.innerHTML = cart.map(item => `

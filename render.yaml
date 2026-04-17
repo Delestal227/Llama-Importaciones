@@ -1,4 +1,13 @@
-routes:
-  - path: "/*"
-    method: "GET"
-    route: "index.html"
+services:
+  - type: web
+    name: llama-importaciones
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: CLOUDINARY_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
