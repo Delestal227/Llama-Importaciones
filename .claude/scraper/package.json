@@ -1,0 +1,13 @@
+{
+  "name": "daz-importadora-scraper",
+  "version": "1.0.0",
+  "description": "Web scraper for dazimportadora.com.ar - extracts products, prices, and images organized by category",
+  "main": "scraper.js",
+  "scripts": {
+    "scrape": "node scraper.js",
+    "test": "node scraper.js --test"
+  },
+  "dependencies": {
+    "playwright": "^1.50.0"
+  }
+}
