@@ -20,10 +20,6 @@ const contactRoutes = require('./routes/contactRoutes');
 const app = express();
 app.set('trust proxy', 1);
 
-// Comprehensive path resolution for frontend static files
-const frontendPath = path.resolve(__dirname, '..', '..', 'frontend', 'dist');
-logger.info({ frontendPath }, 'Static files distribution path');
-
 app.use(pinoHttp({
     logger,
     customLogLevel: (_req, res, err) => {
@@ -103,17 +99,29 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/contacts', contactRoutes);
 
-// Serve static files from the frontend/dist folder
+// Final robust static file serving for Render monorepo
+const frontendPath = path.resolve(__dirname, '../../frontend/dist');
+
+// Serve static files BEFORE any API or catch-all routes
+app.use('/assets', express.static(path.join(frontendPath, 'assets'), { maxAge: '30d' }));
 app.use(express.static(frontendPath));
 
+app.use('/api', notFound);
+
+// The SPA catch-all
 app.get('*', (req, res) => {
-  // Never serve index.html for API routes
-  if (req.path.startsWith('/api')) {
-    return res.status(404).json({ error: 'API route not found' });
+  // Return 404 for API requests that didn't match
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'API endpoint not found' });
   }
   
-  // Serve index.html for everything else (React routing)
-  res.sendFile(path.join(frontendPath, 'index.html'));
+  // Serve the main entry point
+  const indexFile = path.join(frontendPath, 'index.html');
+  res.sendFile(indexFile, (err) => {
+    if (err) {
+      res.status(500).send(`Server Error: Frontend distribution missing at ${frontendPath}`);
+    }
+  });
 });
 
 app.use(errorHandler);

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(node -c index.html)",
-      "Bash(node -c server.js)"
+      "Bash(node -c server.js)",
+      "Bash(node -e ' *)"
     ]
   }
 }
