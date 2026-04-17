@@ -21,12 +21,17 @@ const Header = ({ cartCount, onOpenCart }) => {
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center gap-3">
           <img 
             src="/assets/logo.webp" 
-            alt="Llama Importaciones" 
-            className={`h-12 w-auto transition-all duration-300 ${isScrolled ? 'brightness-100' : 'brightness-0 invert'}`}
+            alt="Llama Logo" 
+            className="h-12 w-auto transition-all duration-300"
           />
+          <span className={`font-bebas text-3xl tracking-wider transition-colors duration-300 ${
+            isScrolled ? 'text-brand-charcoal' : 'text-white'
+          }`}>
+            LLAMA IMPORTACIONES
+          </span>
         </div>
 
         {/* Navigation - Desktop */}
