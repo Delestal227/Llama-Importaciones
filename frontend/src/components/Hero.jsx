@@ -5,14 +5,21 @@ import { ArrowRight } from 'lucide-react';
 const Hero = () => {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-charcoal">
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 opacity-40">
-        <img 
-          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop" 
-          alt="Llama Lifestyle" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/60 via-transparent to-brand-charcoal/80" />
+      {/* Dynamic Video Background */}
+      <div className="absolute inset-0">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="w-full h-full object-cover opacity-60"
+        >
+          <source 
+            src="https://res.cloudinary.com/docbtrhkv/video/upload/q_auto/f_auto/v1776034666/Van_unpacking_items_202604121429_aw5ha0.mp4" 
+            type="video/mp4" 
+          />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/70 via-brand-charcoal/20 to-brand-charcoal/90" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
