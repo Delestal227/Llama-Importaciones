@@ -13,12 +13,18 @@ const googleLogin = asyncHandler(async (req, res) => {
     if (!oauthClient) throw new HttpError(503, 'Google Sign-In no configurado');
     const { credential } = req.body;
 
-    const ticket = await oauthClient.verifyIdToken({
-        idToken: credential,
-        audience: env.GOOGLE_CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
+    let payload;
+    try {
+        const ticket = await oauthClient.verifyIdToken({
+            idToken: credential,
+            audience: env.GOOGLE_CLIENT_ID,
+        });
+        payload = ticket.getPayload();
+    } catch {
+        throw new HttpError(401, 'Credencial de Google inv\u00e1lida o expirada');
+    }
     if (!payload?.email) throw new HttpError(401, 'Credencial inv\u00e1lida');
+    if (payload.email_verified === false) throw new HttpError(401, 'Email no verificado');
 
     const email = payload.email.toLowerCase();
     const role = resolveRole(email);

@@ -17,23 +17,12 @@ const orderRoutes = require('./routes/orderRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 
+const app = express();
+app.set('trust proxy', 1);
+
 // Comprehensive path resolution for frontend static files
 const frontendPath = path.resolve(__dirname, '..', '..', 'frontend', 'dist');
-
-// Debug: Verify frontend dist path locally on server startup
-try {
-    const fs = require('fs');
-    if (fs.existsSync(frontendPath)) {
-        logger.info({ 
-            frontendPath, 
-            files: fs.readdirSync(frontendPath).slice(0, 10) 
-        }, 'Frontend distribution found');
-    } else {
-        logger.error({ frontendPath }, 'Frontend distribution directory NOT FOUND');
-    }
-} catch (e) {
-    logger.error({ err: e.message, frontendPath }, 'Error checking frontend path');
-}
+logger.info({ frontendPath }, 'Static files distribution path');
 
 app.use(pinoHttp({
     logger,
@@ -75,7 +64,24 @@ app.use(cors({
 
 app.use(express.json({ limit: '1mb' }));
 
-// ... (limiters)
+const readLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 300, standardHeaders: true, legacyHeaders: false });
+const writeLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 40, standardHeaders: true, legacyHeaders: false });
+const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 20, standardHeaders: true, legacyHeaders: false });
+
+app.use('/api/auth', authLimiter);
+app.use('/api', (req, res, next) => {
+    if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return readLimiter(req, res, next);
+    return writeLimiter(req, res, next);
+});
+
+app.get('/api/health', async (_req, res) => {
+    try {
+        await query('SELECT 1');
+        res.json({ status: 'ok', db: 'up', timestamp: new Date().toISOString() });
+    } catch {
+        res.status(503).json({ status: 'degraded', db: 'down', timestamp: new Date().toISOString() });
+    }
+});
 
 // Debug Endpoint
 app.get('/api/debug-paths', (req, res) => {
@@ -97,19 +103,17 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/contacts', contactRoutes);
 
-app.use('/api', notFound);
+// Serve static files from the frontend/dist folder
+app.use(express.static(frontendPath));
 
-// SPA Catch-all
 app.get('*', (req, res) => {
-    if (req.url.startsWith('/api')) return res.status(404).json({ error: 'API route not found' });
-    
-    const indexFile = path.join(frontendPath, 'index.html');
-    res.sendFile(indexFile, (err) => {
-        if (err) {
-            logger.error({ err, indexFile }, 'Failed to send index.html');
-            res.status(500).json({ error: 'Frontend file not found', path: indexFile, code: err.code });
-        }
-    });
+  // Never serve index.html for API routes
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ error: 'API route not found' });
+  }
+  
+  // Serve index.html for everything else (React routing)
+  res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 app.use(errorHandler);
