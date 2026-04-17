@@ -37,7 +37,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="space-y-6"
         >
-          <span className="font-jakarta text-primary font-bold tracking-[0.3em] text-sm uppercase">
+          <span className="inline-block font-jakarta text-primary font-bold tracking-[0.3em] text-sm uppercase border-b-2 border-primary/30 pb-2 mb-4">
             CALIDAD · EXCLUSIVIDAD · CONFIANZA
           </span>
           
