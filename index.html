@@ -196,13 +196,38 @@
 </header>
 
 <main>
-    <!-- Section 1: Hero -->
+    <!-- Section 1: Product Catalog with Shopping Cart -->
+    <section class="py-32 px-8 bg-surface" id="catalog">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="mb-16">
+                <h2 class="font-bebas text-6xl text-on-surface tracking-wide">NUESTRO CATALOGO</h2>
+                <p class="font-michroma text-[10px] tracking-[0.15em] text-secondary mt-2">EXPLORA NUESTROS PRODUCTOS · FILTRADOS POR CATEGORIA</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-4 mb-12">
+                <button onclick="filterProducts('all')" data-category="all" class="filter-btn active bg-secondary text-[#B36843] px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-[#F2EDE8] transition-all duration-300">TODOS</button>
+                <button onclick="filterProducts('bazar')" data-category="bazar" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">BAZAR & COCINA</button>
+                <button onclick="filterProducts('electronica')" data-category="electronica" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">ELECTRÓNICA</button>
+                <button onclick="filterProducts('hogar')" data-category="hogar" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">HOGAR</button>
+                <button onclick="filterProducts('cuidado')" data-category="cuidado" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">CUIDADO PERSONAL</button>
+                <button onclick="filterProducts('tecnologia')" data-category="tecnologia" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">TECNOLOGÍA</button>
+            </div>
+
+            <!-- Products Grid with Mobile Navigation -->
+            <div class="relative">
+                <!-- Products Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible scroll-smooth" id="products-grid" style="scroll-behavior: smooth;">
+                    <!-- Products will be rendered here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Hero -->
     <section class="relative min-h-screen sm:min-h-[90vh] flex flex-col items-center justify-center text-center px-3 sm:px-4 overflow-hidden" id="hero">
-        <!-- Background Video / Placeholder -->
         <div class="absolute inset-0 z-0">
-            <!-- Overlay -->
             <div class="absolute inset-0 bg-black/40 z-10"></div>
-            <!-- Hero Video - Van Unpacking (Play once, pause at end) -->
             <video id="hero-video" autoplay muted playsinline class="w-full h-full object-cover">
                 <source src="https://res.cloudinary.com/docbtrhkv/video/upload/q_auto/f_auto/v1776034666/Van_unpacking_items_202604121429_aw5ha0.mp4" type="video/mp4"/>
                 Tu navegador no soporta videos HTML5
@@ -219,7 +244,7 @@
         </div>
     </section>
 
-    <!-- Section 2: About -->
+    <!-- Section 3: About -->
     <section class="py-12 md:py-32 px-4 md:px-8 max-w-screen-2xl mx-auto" id="about">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
             <div>
@@ -237,7 +262,7 @@
         </div>
     </section>
 
-    <!-- Section 3: Categories -->
+    <!-- Section 4: Categories -->
     <section class="py-12 md:py-24 bg-surface-container-low px-4 md:px-8" id="categories">
         <div class="max-w-screen-2xl mx-auto">
             <div class="mb-8 md:mb-16">
@@ -245,7 +270,6 @@
                 <p class="font-michroma text-[9px] md:text-[10px] tracking-[0.15em] text-secondary mt-2">CATALOGO EN MOVIMIENTO · STOCK LIMITADO</p>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-                <!-- Category Cards -->
                 <button onclick="goToCategory('bazar')" class="bg-surface-container-high p-4 md:p-8 rounded-lg border-t-2 border-secondary group hover:bg-surface-container-highest transition-colors cursor-pointer text-left">
                     <span class="material-symbols-outlined text-secondary mb-4 md:mb-6 text-2xl md:text-3xl block">restaurant</span>
                     <h3 class="font-bebas text-lg md:text-3xl text-on-surface">BAZAR & COCINA</h3>
@@ -270,34 +294,6 @@
                     <span class="material-symbols-outlined text-secondary mb-4 md:mb-6 text-2xl md:text-3xl block">category</span>
                     <h3 class="font-bebas text-lg md:text-3xl text-on-surface">VER TODO</h3>
                 </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 3.5: Product Catalog with Shopping Cart -->
-    <section class="py-32 px-8 bg-surface" id="catalog">
-        <div class="max-w-screen-2xl mx-auto">
-            <div class="mb-16">
-                <h2 class="font-bebas text-6xl text-on-surface tracking-wide">NUESTRO CATALOGO</h2>
-                <p class="font-michroma text-[10px] tracking-[0.15em] text-secondary mt-2">EXPLORA NUESTROS PRODUCTOS · FILTRADOS POR CATEGORIA</p>
-            </div>
-
-            <!-- Filter Buttons -->
-            <div class="flex flex-wrap gap-4 mb-12">
-                <button onclick="filterProducts('all')" data-category="all" class="filter-btn active bg-secondary text-[#B36843] px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-[#F2EDE8] transition-all duration-300">TODOS</button>
-                <button onclick="filterProducts('bazar')" data-category="bazar" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">BAZAR & COCINA</button>
-                <button onclick="filterProducts('electronica')" data-category="electronica" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">ELECTRÓNICA</button>
-                <button onclick="filterProducts('hogar')" data-category="hogar" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">HOGAR</button>
-                <button onclick="filterProducts('cuidado')" data-category="cuidado" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">CUIDADO PERSONAL</button>
-                <button onclick="filterProducts('tecnologia')" data-category="tecnologia" class="filter-btn bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-bebas text-lg tracking-wide hover:bg-secondary hover:text-[#B36843] transition-all duration-300">TECNOLOGÍA</button>
-            </div>
-
-            <!-- Products Grid with Mobile Navigation -->
-            <div class="relative">
-                <!-- Products Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible scroll-smooth" id="products-grid" style="scroll-behavior: smooth;">
-                    <!-- Products will be rendered here by JavaScript -->
-                </div>
             </div>
         </div>
     </section>
