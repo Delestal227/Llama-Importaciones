@@ -25,12 +25,26 @@ app.use('/api/', limiter);
 
 app.use(express.json());
 
-// Routes
+const path = require('path');
+
+// ... (existing middleware)
+
+// Serve Backend API routes
 app.use('/api/products', productRoutes);
 
 // Health Check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });
+});
+
+// --- Unified Deployment Logic ---
+// Serving static files from the frontend build directory
+const frontendPath = path.join(__dirname, '../../frontend/dist');
+app.use(express.static(frontendPath));
+
+// Catch-all route to serve the React app for any non-API request
+app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 app.listen(PORT, async () => {

@@ -1,10 +1,8 @@
 services:
-  # Backend API Service
   - type: web
-    name: llama-importaciones-api
+    name: llama-importaciones
     runtime: node
-    rootDir: backend
-    buildCommand: npm install
+    buildCommand: npm run build
     startCommand: npm start
     envVars:
       - key: DATABASE_URL
@@ -13,13 +11,5 @@ services:
         sync: false
       - key: NODE_ENV
         value: production
-
-  # Frontend Static Site
-  - type: static
-    name: llama-importaciones-web
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    publishDir: dist
-    envVars:
       - key: VITE_API_URL
-        value: https://llama-importaciones-api.onrender.com/api
+        value: https://llama-importaciones.onrender.com/api
