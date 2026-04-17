@@ -294,10 +294,6 @@
 
             <!-- Products Grid with Mobile Navigation -->
             <div class="relative">
-                <!-- Mobile Navigation Arrows -->
-                <button onclick="scrollProductsLeft()" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 md:hidden bg-secondary text-[#B36843] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#F2EDE8] transition-all shadow-lg font-bebas text-2xl">←</button>
-                <button onclick="scrollProductsRight()" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 md:hidden bg-secondary text-[#B36843] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#F2EDE8] transition-all shadow-lg font-bebas text-2xl">→</button>
-
                 <!-- Products Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible scroll-smooth" id="products-grid" style="scroll-behavior: smooth;">
                     <!-- Products will be rendered here by JavaScript -->
@@ -623,7 +619,14 @@
                     theme: 'dark',
                     size: 'large'
                 });
-                console.log('✅ Google Sign-In button renderizado');
+            }
+
+            const signinContainer = document.getElementById('google-signin-container');
+            if (signinContainer) {
+                window.google.accounts.id.renderButton(signinContainer, {
+                    theme: 'dark',
+                    size: 'large'
+                });
             }
         } catch (error) {
             console.error('❌ Error en Google Sign-In:', error);
@@ -727,6 +730,7 @@
     // Update UI with user info
     function updateUserUI() {
         const signinDiv = document.getElementById('google-signin');
+        const signinContainer = document.getElementById('google-signin-container');
         const userInfo = document.getElementById('user-info');
 
         if (!signinDiv || !userInfo) {
@@ -736,6 +740,7 @@
 
         if (currentUser) {
             signinDiv.style.display = 'none';
+            if (signinContainer) signinContainer.style.display = 'none';
             userInfo.style.display = 'flex';
             userInfo.innerHTML = `
                 <div class="flex items-center gap-2">
@@ -744,12 +749,10 @@
                     <button onclick="signOutUser()" class="text-xs text-secondary hover:text-primary transition-colors">Cerrar sesión</button>
                 </div>
             `;
-            console.log('✅ UI actualizada: usuario autenticado');
         } else {
             signinDiv.style.display = 'block';
+            if (signinContainer) signinContainer.style.display = 'flex';
             userInfo.style.display = 'none';
-            userInfo.innerHTML = '';
-            console.log('✅ UI actualizada: usuario desconectado');
         }
     }
 
