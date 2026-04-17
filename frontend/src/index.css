@@ -1,8 +1,26 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-primary-light: #F39C12;
+  --color-primary: #E67E22;
+  --color-primary-dark: #D35400;
+  
+  --color-surface-50: #FFFFFF;
+  --color-surface-100: #FAFAFA;
+  --color-surface-200: #F5F5F5;
+  --color-surface-300: #E0E0E0;
+
+  --color-brand-charcoal: #1A1A1A;
+  --color-brand-gray: #4A4A4A;
+  --color-brand-muted: #8E8E8E;
+
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+
+  --shadow-premium: 0 4px 30px rgba(0, 0, 0, 0.05);
+  --shadow-premium-hover: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
 
 @layer base {
   body {
