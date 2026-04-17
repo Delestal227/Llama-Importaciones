@@ -1,0 +1,23 @@
+{
+  "_comment": "Mapea las categorias del JSON de origen a los slugs internos (bazar, electronica, hogar, cuidado, tecnologia, varios). Editar segun las categorias reales del JSON.",
+  "Accesorios": "tecnologia",
+  "Audio": "electronica",
+  "Auriculares": "electronica",
+  "Bazar": "bazar",
+  "Cocina": "bazar",
+  "Cocina y Bazar": "bazar",
+  "Electrodomesticos": "electronica",
+  "Electronica": "electronica",
+  "Hogar": "hogar",
+  "Iluminacion": "hogar",
+  "Cuidado Personal": "cuidado",
+  "Belleza": "cuidado",
+  "Salud": "cuidado",
+  "Tecnologia": "tecnologia",
+  "Celulares": "tecnologia",
+  "Computacion": "tecnologia",
+  "Juguetes": "varios",
+  "Deportes": "varios",
+  "Herramientas": "varios",
+  "_default": "varios"
+}
