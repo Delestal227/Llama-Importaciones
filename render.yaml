@@ -12,4 +12,6 @@ services:
       - key: NODE_ENV
         value: production
       - key: VITE_API_URL
-        value: https://llamaimportaciones.onrender.com/api
+        value: /api
+      - key: VITE_GOOGLE_CLIENT_ID
+        value: 354015976108-epog0rvn626k5qfrbi88m6pa3ietv43n.apps.googleusercontent.com
