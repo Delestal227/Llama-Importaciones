@@ -8,7 +8,7 @@ const Hero = () => {
       {/* Dynamic Background */}
       <div className="absolute inset-0 opacity-40">
         <img 
-          src="https://res.cloudinary.com/docbtrhkv/image/upload/v1713294336/daz/banner-main.jpg" 
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop" 
           alt="Llama Lifestyle" 
           className="w-full h-full object-cover"
         />
