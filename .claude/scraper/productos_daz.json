@@ -1,9 +1,9 @@
 {
   "metadata": {
     "source": "https://dazimportadora.com.ar",
-    "scrapedAt": "2026-04-17T04:22:13.903Z",
-    "totalProducts": 551,
-    "totalPages": 23,
+    "scrapedAt": "2026-04-17T04:25:37.300Z",
+    "totalProducts": 552,
+    "totalPages": 8,
     "totalCategories": 62
   },
   "categorias": {
@@ -282,6 +282,19 @@
         "badge": ""
       },
       {
+        "name": "Cable Para Iphone USB-C A USB-C 2M",
+        "price": "2290",
+        "regularPrice": "2290",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/4.jpg",
+        "productUrl": "https://dazimportadora.com.ar/producto/cable-para-iphone-usb-c-a-usb-c-2m/",
+        "brand": "Apple",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Pilas Recargables 3.7V LI-ION 8800MAh",
         "price": "1299",
         "regularPrice": "1299",
@@ -516,19 +529,6 @@
         "badge": ""
       },
       {
-        "name": "Hub USB DINAX dx-usbhub4p",
-        "price": "3390",
-        "regularPrice": "3390",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2023/12/43.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/hub-usb-dinax-dx-usbhub4p/",
-        "brand": "Dinax",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
         "name": "Cable USB-C a USB-C SUELTO",
         "price": "590",
         "regularPrice": "590",
@@ -696,6 +696,19 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/11/31-510x510.png",
         "productUrl": "https://dazimportadora.com.ar/producto/mini-impresora-bluetooth-printer/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Proyector Astronauta Star Light laser + Parlante bluetooth",
+        "price": "18699",
+        "regularPrice": "18699",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/09/preventa-fotos-50.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/proyector-astronauta-star-light-laser-bluetooth/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -1445,19 +1458,6 @@
         "badge": ""
       },
       {
-        "name": "Parlante Auto Retro Bluetooth FM USB SD OM-596",
-        "price": "21199",
-        "regularPrice": "21199",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-2026-04-01T161943.137.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/parlante-auto-retro-bluetooth-fm-usb-sd-om-596/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
         "name": "Auricular Bluetooth BULLTEC AIR7PRO",
         "price": "9499",
         "regularPrice": "9499",
@@ -1842,6 +1842,32 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/D_NQ_NP_2X_986268-MLA74570609922_022024-F.webp",
         "productUrl": "https://dazimportadora.com.ar/producto/parlante-6-5-karaoke-con-microfono-hong-kong-oryx/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Parlante Cuadrado Bluetooth Porta Celular JZ-1138",
+        "price": "14099",
+        "regularPrice": "14099",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-81-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/parlante-cuadrado-bluetooth-porta-celular-jsjz-jz-1138/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Radio Retro Recargable Porta Celular Bluetooth YUEGAN YG-7071",
+        "price": "27299",
+        "regularPrice": "27299",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-80-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/radio-retro-recargable-porta-celular-bluetooth-yuegan-yg-7071/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -3160,19 +3186,6 @@
         "badge": ""
       },
       {
-        "name": "Frasco de Vidrio con Tapa Metálica Individual JK-4524",
-        "price": "4100",
-        "regularPrice": "4100",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-19-02-10.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/frasco-de-vidrio-con-tapa-metalica-individual-jk-4524/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
         "name": "HUMIDIFICADOR ESTILO FUEGO ROMA DIFFUSER ACC0262",
         "price": "9399",
         "regularPrice": "9399",
@@ -3440,19 +3453,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-64.png",
         "productUrl": "https://dazimportadora.com.ar/producto/lampara-esfera-de-noche-con-parlante-integrado-music-moon-light-ilu0169/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Lampara LED USB Espiral CREATIVE GIFT LIGHT",
-        "price": "8799",
-        "regularPrice": "8799",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-58.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/lampara-led-usb-espiral-creative-gift-light/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -3767,19 +3767,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-2026-04-09T162855.268.png",
         "productUrl": "https://dazimportadora.com.ar/producto/plancha-para-pelo-alisadora-nano-titanium/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Plancha de Pelo Para Viajes OSR 197",
-        "price": "4999",
-        "regularPrice": "4999",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-1-4.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/mini-plancha-de-pelo-para-viajes-osr/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -4269,6 +4256,19 @@
         "badge": ""
       },
       {
+        "name": "ACOLCHADO KING EDREDON 3 EN 1 OR-EBN026",
+        "price": "63699",
+        "regularPrice": "63699",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-4-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/acolchado-king-edredon-3-en-1-or-ebn026/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Toalla de Baño Colores Varios 140x70cm JK-4201",
         "price": "4150",
         "regularPrice": "4150",
@@ -4728,6 +4728,19 @@
         "badge": ""
       },
       {
+        "name": "Cable Para Iphone USB-C A USB-C 2M",
+        "price": "2290",
+        "regularPrice": "2290",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/4.jpg",
+        "productUrl": "https://dazimportadora.com.ar/producto/cable-para-iphone-usb-c-a-usb-c-2m/",
+        "brand": "Apple",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Cable de Alimentación tipo 8 (Suelto)",
         "price": "1510",
         "regularPrice": "1510",
@@ -5026,32 +5039,6 @@
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-9.png",
         "productUrl": "https://dazimportadora.com.ar/producto/linterna-tactica-suono-a-pilas-ilu0075/",
         "brand": "Suono",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "GUANTES PARA INVIERNO SL108",
-        "price": "599",
-        "regularPrice": "599",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-28.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guantes-para-invierno-sl108/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "GUANTE PELUCHE DE NIÑO SL117",
-        "price": "819",
-        "regularPrice": "819",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/f9e74df9-e5a0-495a-a9f9-7b2b00726983.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guante-peluche-de-nino-sl117/",
-        "brand": "",
         "sku": "",
         "stockStatus": "",
         "badge": ""
@@ -5425,6 +5412,32 @@
         "badge": ""
       },
       {
+        "name": "Pava Eléctrica Estilo Retro Redonda 2200W 1.7Lts ORYX OR-JEE03",
+        "price": "51990",
+        "regularPrice": "51990",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-23-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/pava-electrica-estilo-retro-2200w-1-7lts-oryx-or-jee03/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Microondas Digital 20L 1000W ORYX",
+        "price": "136999",
+        "regularPrice": "136999",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/07/Articulos-19-02-75.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/microondas-20l-1000w-oryx/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Pava Eléctrica Estilo Retro Alta Varios Colores 1500W 1.8L ORYX JEE03",
         "price": "51990",
         "regularPrice": "51990",
@@ -5523,19 +5536,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-90.png",
         "productUrl": "https://dazimportadora.com.ar/producto/set-de-cuchillos-sierrita-fruit-knife-x6-jk-4152/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Frasco de Vidrio con Tapa Metálica Individual JK-4524",
-        "price": "4100",
-        "regularPrice": "4100",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-19-02-10.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/frasco-de-vidrio-con-tapa-metalica-individual-jk-4524/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -5862,6 +5862,19 @@
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/04/productos-14-04-25-7.png",
         "productUrl": "https://dazimportadora.com.ar/producto/sandwichera-electrica-dinax-sm700sw-04/",
         "brand": "Dinax",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Set De Ollas Oryx Ck200 5 Piezas Batería De Cocina Blanco",
+        "price": "61900",
+        "regularPrice": "61900",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-84.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/set-de-ollas-oryx-ck200-5-piezas-bateria-de-cocina-blanco/",
+        "brand": "Oryx",
         "sku": "",
         "stockStatus": "",
         "badge": ""
@@ -6982,6 +6995,32 @@
         "badge": ""
       },
       {
+        "name": "Plancha A Vapor Oryx 2200w 320ml SP-101",
+        "price": "31999",
+        "regularPrice": "31999",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-19-02-14-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/plancha-a-vapor-oryx-2200w-320ml-sp-101/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Microondas Digital 20L 1000W ORYX",
+        "price": "136999",
+        "regularPrice": "136999",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/07/Articulos-19-02-75.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/microondas-20l-1000w-oryx/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Pava Eléctrica Digital Termómetro Varios Modos ORYX JEE02",
         "price": "51990",
         "regularPrice": "51990",
@@ -7571,6 +7610,32 @@
         "badge": ""
       },
       {
+        "name": "Taladro de Impacto + Amoladora Angular AG125/OR508",
+        "price": "88699",
+        "regularPrice": "88699",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/11/11-2-510x510.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/taladro-de-impacto-amoladora-angular-ag125-or508/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Motosierra Inalambrica con Espada 12″ Pulgadas ORYX EL574",
+        "price": "101599",
+        "regularPrice": "101599",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/motosierra-inalambrica-con-espada-12-pulgadas-oryx-el574/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "MALETIN DE HERRAMIENTA 399 pcs OR-TS100",
         "price": "144899",
         "regularPrice": "144899",
@@ -7669,32 +7734,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-16-01-62.png",
         "productUrl": "https://dazimportadora.com.ar/producto/linterna-busca-huella-7-leds-bateria-hasta-15hs-ly-825/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "GUANTES PARA INVIERNO SL108",
-        "price": "599",
-        "regularPrice": "599",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-28.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guantes-para-invierno-sl108/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "GUANTE PELUCHE DE NIÑO SL117",
-        "price": "819",
-        "regularPrice": "819",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/f9e74df9-e5a0-495a-a9f9-7b2b00726983.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guante-peluche-de-nino-sl117/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -8033,19 +8072,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-46.png",
         "productUrl": "https://dazimportadora.com.ar/producto/lampara-led-de-escritorio-porta-lapiz-ms-18-ilu0154/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Lampara LED USB Espiral CREATIVE GIFT LIGHT",
-        "price": "8799",
-        "regularPrice": "8799",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-58.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/lampara-led-usb-espiral-creative-gift-light/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -8888,6 +8914,32 @@
         "badge": ""
       },
       {
+        "name": "Taladro de Impacto + Amoladora Angular AG125/OR508",
+        "price": "88699",
+        "regularPrice": "88699",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/11/11-2-510x510.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/taladro-de-impacto-amoladora-angular-ag125-or508/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Motosierra Inalambrica con Espada 12″ Pulgadas ORYX EL574",
+        "price": "101599",
+        "regularPrice": "101599",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/motosierra-inalambrica-con-espada-12-pulgadas-oryx-el574/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "MALETIN DE HERRAMIENTA 399 pcs OR-TS100",
         "price": "144899",
         "regularPrice": "144899",
@@ -9592,6 +9644,58 @@
         "badge": ""
       },
       {
+        "name": "ACOLCHADO KING EDREDON 3 EN 1 OR-EBN026",
+        "price": "63699",
+        "regularPrice": "63699",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-4-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/acolchado-king-edredon-3-en-1-or-ebn026/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Plancha A Vapor Oryx 2200w 320ml SP-101",
+        "price": "31999",
+        "regularPrice": "31999",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-19-02-14-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/plancha-a-vapor-oryx-2200w-320ml-sp-101/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Pava Eléctrica Estilo Retro Redonda 2200W 1.7Lts ORYX OR-JEE03",
+        "price": "51990",
+        "regularPrice": "51990",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-23-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/pava-electrica-estilo-retro-2200w-1-7lts-oryx-or-jee03/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Microondas Digital 20L 1000W ORYX",
+        "price": "136999",
+        "regularPrice": "136999",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/07/Articulos-19-02-75.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/microondas-20l-1000w-oryx/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Manta Tejida Flecos Colores ORYX OR-EBN033",
         "price": "20999",
         "regularPrice": "20999",
@@ -9807,45 +9911,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-16-01-62.png",
         "productUrl": "https://dazimportadora.com.ar/producto/linterna-busca-huella-7-leds-bateria-hasta-15hs-ly-825/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "GUANTES PARA INVIERNO SL108",
-        "price": "599",
-        "regularPrice": "599",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-28.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guantes-para-invierno-sl108/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "GUANTE PELUCHE DE NIÑO SL117",
-        "price": "819",
-        "regularPrice": "819",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/f9e74df9-e5a0-495a-a9f9-7b2b00726983.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guante-peluche-de-nino-sl117/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Frasco de Vidrio con Tapa Metálica Individual JK-4524",
-        "price": "4100",
-        "regularPrice": "4100",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-19-02-10.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/frasco-de-vidrio-con-tapa-metalica-individual-jk-4524/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -10320,6 +10385,19 @@
         "badge": ""
       },
       {
+        "name": "Proyector Astronauta Star Light laser + Parlante bluetooth",
+        "price": "18699",
+        "regularPrice": "18699",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/09/preventa-fotos-50.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/proyector-astronauta-star-light-laser-bluetooth/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Mate Clasico Termico de Acero Inoxidable 260ML TH-01G",
         "price": "5799",
         "regularPrice": "5799",
@@ -10632,6 +10710,19 @@
         "badge": ""
       },
       {
+        "name": "Set De Ollas Oryx Ck200 5 Piezas Batería De Cocina Blanco",
+        "price": "61900",
+        "regularPrice": "61900",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-84.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/set-de-ollas-oryx-ck200-5-piezas-bateria-de-cocina-blanco/",
+        "brand": "Oryx",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Lampara de Escritorio 3 Tonos DESK LAMP JS-4382",
         "price": "9599",
         "regularPrice": "9599",
@@ -10756,19 +10847,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-64.png",
         "productUrl": "https://dazimportadora.com.ar/producto/lampara-esfera-de-noche-con-parlante-integrado-music-moon-light-ilu0169/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Lampara LED USB Espiral CREATIVE GIFT LIGHT",
-        "price": "8799",
-        "regularPrice": "8799",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-58.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/lampara-led-usb-espiral-creative-gift-light/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -12649,6 +12727,19 @@
         "badge": ""
       },
       {
+        "name": "Proyector Astronauta Star Light laser + Parlante bluetooth",
+        "price": "18699",
+        "regularPrice": "18699",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/09/preventa-fotos-50.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/proyector-astronauta-star-light-laser-bluetooth/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
         "name": "Lampara Touch Velador LED Recargable BLANCA",
         "price": "7590",
         "regularPrice": "7590",
@@ -12734,19 +12825,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-46.png",
         "productUrl": "https://dazimportadora.com.ar/producto/lampara-led-de-escritorio-porta-lapiz-ms-18-ilu0154/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Lampara LED USB Espiral CREATIVE GIFT LIGHT",
-        "price": "8799",
-        "regularPrice": "8799",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-58.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/lampara-led-usb-espiral-creative-gift-light/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -13210,19 +13288,6 @@
         "badge": ""
       },
       {
-        "name": "GUANTE PARA MOTO DE INVIERNO SL076",
-        "price": "5899",
-        "regularPrice": "5899",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-94.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guante-para-moto-de-invierno-sl076/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
         "name": "Guante de Nieve Térmico Impermeable SPORTSMAN SL079",
         "price": "7590",
         "regularPrice": "7590",
@@ -13230,32 +13295,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/519984930_1178300057675440_5497083055794240163_n-150x150.jpg",
         "productUrl": "https://dazimportadora.com.ar/producto/guante-de-nieve-termico-impermeable-sportsman-sl079/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "GUANTES PARA INVIERNO SL108",
-        "price": "599",
-        "regularPrice": "599",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-28.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guantes-para-invierno-sl108/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "GUANTE PELUCHE DE NIÑO SL117",
-        "price": "819",
-        "regularPrice": "819",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/f9e74df9-e5a0-495a-a9f9-7b2b00726983.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/guante-peluche-de-nino-sl117/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -13329,19 +13368,6 @@
         "badge": ""
       },
       {
-        "name": "Router Wifi 4 Antenas B450L",
-        "price": "29990",
-        "regularPrice": "29990",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-9.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/router-wifi-4-antenas-b450l/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
         "name": "Volante y Pedal Vibration Steering X360/PS2/PS3/PC WIN",
         "price": "99900",
         "regularPrice": "99900",
@@ -13375,19 +13401,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/08/Articulos-2608-6-2.png",
         "productUrl": "https://dazimportadora.com.ar/producto/adaptador-dinax-nano-usb-inalambrico-300mbps/",
-        "brand": "Dinax",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Hub USB DINAX dx-usbhub4p",
-        "price": "3390",
-        "regularPrice": "3390",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2023/12/43.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/hub-usb-dinax-dx-usbhub4p/",
         "brand": "Dinax",
         "sku": "",
         "stockStatus": "",
@@ -13455,6 +13468,19 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-19-02-15.png",
         "productUrl": "https://dazimportadora.com.ar/producto/parlante-bluetooth-diseno-de-moto-himiso-kms-281/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Proyector Astronauta Star Light laser + Parlante bluetooth",
+        "price": "18699",
+        "regularPrice": "18699",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/09/preventa-fotos-50.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/proyector-astronauta-star-light-laser-bluetooth/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -14804,19 +14830,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-68-1.png",
         "productUrl": "https://dazimportadora.com.ar/producto/canasto-textil-para-ropa-extra-suave-hog0687/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Lampara LED USB Espiral CREATIVE GIFT LIGHT",
-        "price": "8799",
-        "regularPrice": "8799",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-58.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/lampara-led-usb-espiral-creative-gift-light/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -16841,19 +16854,6 @@
         "badge": ""
       },
       {
-        "name": "Parlante Auto Retro Bluetooth FM USB SD OM-596",
-        "price": "21199",
-        "regularPrice": "21199",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-2026-04-01T161943.137.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/parlante-auto-retro-bluetooth-fm-usb-sd-om-596/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
         "name": "PARLANTE 3″ SG-608",
         "price": "8499",
         "regularPrice": "8499",
@@ -17056,6 +17056,19 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/D_NQ_NP_2X_986268-MLA74570609922_022024-F.webp",
         "productUrl": "https://dazimportadora.com.ar/producto/parlante-6-5-karaoke-con-microfono-hong-kong-oryx/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Parlante Cuadrado Bluetooth Porta Celular JZ-1138",
+        "price": "14099",
+        "regularPrice": "14099",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-81-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/parlante-cuadrado-bluetooth-porta-celular-jsjz-jz-1138/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -17519,19 +17532,6 @@
         "badge": ""
       },
       {
-        "name": "Parlante Auto Retro Bluetooth FM USB SD OM-596",
-        "price": "21199",
-        "regularPrice": "21199",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-2026-04-01T161943.137.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/parlante-auto-retro-bluetooth-fm-usb-sd-om-596/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
         "name": "Parlante Auto Retro Bluetooth 10W OM-1934",
         "price": "22999",
         "regularPrice": "22999",
@@ -17708,6 +17708,19 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/D_NQ_NP_2X_986268-MLA74570609922_022024-F.webp",
         "productUrl": "https://dazimportadora.com.ar/producto/parlante-6-5-karaoke-con-microfono-hong-kong-oryx/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Parlante Cuadrado Bluetooth Porta Celular JZ-1138",
+        "price": "14099",
+        "regularPrice": "14099",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-81-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/parlante-cuadrado-bluetooth-porta-celular-jsjz-jz-1138/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -18063,19 +18076,6 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-2026-04-09T162855.268.png",
         "productUrl": "https://dazimportadora.com.ar/producto/plancha-para-pelo-alisadora-nano-titanium/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Plancha de Pelo Para Viajes OSR 197",
-        "price": "4999",
-        "regularPrice": "4999",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-1-4.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/mini-plancha-de-pelo-para-viajes-osr/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -18617,6 +18617,19 @@
         "onSale": false,
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-59.png",
         "productUrl": "https://dazimportadora.com.ar/producto/radio-vintage-5-bandas-a-pilas-sonikas-ayv0475/",
+        "brand": "",
+        "sku": "",
+        "stockStatus": "",
+        "badge": ""
+      },
+      {
+        "name": "Radio Retro Recargable Porta Celular Bluetooth YUEGAN YG-7071",
+        "price": "27299",
+        "regularPrice": "27299",
+        "salePrice": null,
+        "onSale": false,
+        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-80-1.png",
+        "productUrl": "https://dazimportadora.com.ar/producto/radio-retro-recargable-porta-celular-bluetooth-yuegan-yg-7071/",
         "brand": "",
         "sku": "",
         "stockStatus": "",
@@ -19406,19 +19419,6 @@
         "badge": ""
       },
       {
-        "name": "Router Wifi 4 Antenas B450L",
-        "price": "29990",
-        "regularPrice": "29990",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-9.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/router-wifi-4-antenas-b450l/",
-        "brand": "",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
         "name": "Camara de Interior SUONO AYV0379",
         "price": "17899",
         "regularPrice": "17899",
@@ -19700,32 +19700,6 @@
         "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/05/Diseno-sin-titulo-2025-05-14T173300.025.png",
         "productUrl": "https://dazimportadora.com.ar/producto/camara-con-reflector-carga-solar-jortan/",
         "brand": "Jortan",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Hub USB DINAX dx-usbhub4p",
-        "price": "3390",
-        "regularPrice": "3390",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2023/12/43.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/hub-usb-dinax-dx-usbhub4p/",
-        "brand": "Dinax",
-        "sku": "",
-        "stockStatus": "",
-        "badge": ""
-      },
-      {
-        "name": "Contadora de Billetes DINAX CON-CB03C",
-        "price": "84899",
-        "regularPrice": "84899",
-        "salePrice": null,
-        "onSale": false,
-        "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/03/2.4GHZ-BT-3.png",
-        "productUrl": "https://dazimportadora.com.ar/producto/contadora-de-billetes-dinax-con-cb03c/",
-        "brand": "Dinax",
         "sku": "",
         "stockStatus": "",
         "badge": ""
@@ -21806,6 +21780,173 @@
       "badge": ""
     },
     {
+      "name": "ACOLCHADO KING EDREDON 3 EN 1 OR-EBN026",
+      "price": "63699",
+      "regularPrice": "63699",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-4-1.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/acolchado-king-edredon-3-en-1-or-ebn026/",
+      "categories": [
+        "Hogar",
+        "Blanquearía"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Hogar",
+          "url": "https://dazimportadora.com.ar/c/hogar/"
+        },
+        {
+          "name": "Blanquearía",
+          "url": "https://dazimportadora.com.ar/c/hogar/blanquearia/"
+        }
+      ],
+      "brand": "",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
+      "name": "Plancha A Vapor Oryx 2200w 320ml SP-101",
+      "price": "31999",
+      "regularPrice": "31999",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-19-02-14-1.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/plancha-a-vapor-oryx-2200w-320ml-sp-101/",
+      "categories": [
+        "Hogar",
+        "Electrodomésticos"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Hogar",
+          "url": "https://dazimportadora.com.ar/c/hogar/"
+        },
+        {
+          "name": "Electrodomésticos",
+          "url": "https://dazimportadora.com.ar/c/hogar/electrodomesticos/"
+        }
+      ],
+      "brand": "",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
+      "name": "Pava Eléctrica Estilo Retro Redonda 2200W 1.7Lts ORYX OR-JEE03",
+      "price": "51990",
+      "regularPrice": "51990",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-23-1.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/pava-electrica-estilo-retro-2200w-1-7lts-oryx-or-jee03/",
+      "categories": [
+        "Hogar",
+        "Cocina"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Hogar",
+          "url": "https://dazimportadora.com.ar/c/hogar/"
+        },
+        {
+          "name": "Cocina",
+          "url": "https://dazimportadora.com.ar/c/hogar/cocina/"
+        }
+      ],
+      "brand": "Oryx",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
+      "name": "Taladro de Impacto + Amoladora Angular AG125/OR508",
+      "price": "88699",
+      "regularPrice": "88699",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/11/11-2-510x510.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/taladro-de-impacto-amoladora-angular-ag125-or508/",
+      "categories": [
+        "Ferretería",
+        "Herramientas"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Ferretería",
+          "url": "https://dazimportadora.com.ar/c/ferreteria/"
+        },
+        {
+          "name": "Herramientas",
+          "url": "https://dazimportadora.com.ar/c/ferreteria/herramientas/"
+        }
+      ],
+      "brand": "Oryx",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
+      "name": "Microondas Digital 20L 1000W ORYX",
+      "price": "136999",
+      "regularPrice": "136999",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/07/Articulos-19-02-75.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/microondas-20l-1000w-oryx/",
+      "categories": [
+        "Hogar",
+        "Cocina",
+        "Electrodomésticos"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Hogar",
+          "url": "https://dazimportadora.com.ar/c/hogar/"
+        },
+        {
+          "name": "Cocina",
+          "url": "https://dazimportadora.com.ar/c/hogar/cocina/"
+        },
+        {
+          "name": "Electrodomésticos",
+          "url": "https://dazimportadora.com.ar/c/hogar/electrodomesticos/"
+        }
+      ],
+      "brand": "Oryx",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
+      "name": "Motosierra Inalambrica con Espada 12″ Pulgadas ORYX EL574",
+      "price": "101599",
+      "regularPrice": "101599",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/motosierra-inalambrica-con-espada-12-pulgadas-oryx-el574/",
+      "categories": [
+        "Ferretería",
+        "Herramientas"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Ferretería",
+          "url": "https://dazimportadora.com.ar/c/ferreteria/"
+        },
+        {
+          "name": "Herramientas",
+          "url": "https://dazimportadora.com.ar/c/ferreteria/herramientas/"
+        }
+      ],
+      "brand": "Oryx",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
       "name": "Manta Tejida Flecos Colores ORYX OR-EBN033",
       "price": "20999",
       "regularPrice": "20999",
@@ -22317,28 +22458,6 @@
       "badge": ""
     },
     {
-      "name": "GUANTE PARA MOTO DE INVIERNO SL076",
-      "price": "5899",
-      "regularPrice": "5899",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-94.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/guante-para-moto-de-invierno-sl076/",
-      "categories": [
-        "Indumentaria"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Indumentaria",
-          "url": "https://dazimportadora.com.ar/c/hogar/indumentaria/"
-        }
-      ],
-      "brand": "",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
       "name": "FRASCO STORAGE JAR 700ML FTM-01",
       "price": "4099",
       "regularPrice": "4099",
@@ -22631,139 +22750,6 @@
         {
           "name": "Hogar",
           "url": "https://dazimportadora.com.ar/c/hogar/"
-        }
-      ],
-      "brand": "",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "GUANTES PARA INVIERNO SL108",
-      "price": "599",
-      "regularPrice": "599",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-28.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/guantes-para-invierno-sl108/",
-      "categories": [
-        "Hogar",
-        "Camping Caza Pesca",
-        "Indumentaria",
-        "Ferretería"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Hogar",
-          "url": "https://dazimportadora.com.ar/c/hogar/"
-        },
-        {
-          "name": "Camping Caza Pesca",
-          "url": "https://dazimportadora.com.ar/c/hogar/camping-caza-pesca/"
-        },
-        {
-          "name": "Indumentaria",
-          "url": "https://dazimportadora.com.ar/c/hogar/indumentaria/"
-        },
-        {
-          "name": "Ferretería",
-          "url": "https://dazimportadora.com.ar/c/ferreteria/"
-        }
-      ],
-      "brand": "",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "GUANTE PELUCHE DE NIÑO SL117",
-      "price": "819",
-      "regularPrice": "819",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/f9e74df9-e5a0-495a-a9f9-7b2b00726983.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/guante-peluche-de-nino-sl117/",
-      "categories": [
-        "Hogar",
-        "Camping Caza Pesca",
-        "Indumentaria",
-        "Ferretería"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Hogar",
-          "url": "https://dazimportadora.com.ar/c/hogar/"
-        },
-        {
-          "name": "Camping Caza Pesca",
-          "url": "https://dazimportadora.com.ar/c/hogar/camping-caza-pesca/"
-        },
-        {
-          "name": "Indumentaria",
-          "url": "https://dazimportadora.com.ar/c/hogar/indumentaria/"
-        },
-        {
-          "name": "Ferretería",
-          "url": "https://dazimportadora.com.ar/c/ferreteria/"
-        }
-      ],
-      "brand": "",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "Frasco de Vidrio con Tapa Metálica Individual JK-4524",
-      "price": "4100",
-      "regularPrice": "4100",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/02/Articulos-19-02-10.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/frasco-de-vidrio-con-tapa-metalica-individual-jk-4524/",
-      "categories": [
-        "Hogar",
-        "Bazar & Deco",
-        "Cocina"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Hogar",
-          "url": "https://dazimportadora.com.ar/c/hogar/"
-        },
-        {
-          "name": "Bazar & Deco",
-          "url": "https://dazimportadora.com.ar/c/hogar/bazar-deco/"
-        },
-        {
-          "name": "Cocina",
-          "url": "https://dazimportadora.com.ar/c/hogar/cocina/"
-        }
-      ],
-      "brand": "",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "Plancha de Pelo Para Viajes OSR 197",
-      "price": "4999",
-      "regularPrice": "4999",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-1-4.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/mini-plancha-de-pelo-para-viajes-osr/",
-      "categories": [
-        "Belleza & Cuidado Personal",
-        "Planchitas y Secadores"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Belleza & Cuidado Personal",
-          "url": "https://dazimportadora.com.ar/c/belleza-cuidado-personal/"
-        },
-        {
-          "name": "Planchitas y Secadores",
-          "url": "https://dazimportadora.com.ar/c/belleza-cuidado-personal/planchitas-y-secadores/"
         }
       ],
       "brand": "",
@@ -23734,38 +23720,6 @@
         }
       ],
       "brand": "OM",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "Parlante Auto Retro Bluetooth FM USB SD OM-596",
-      "price": "21199",
-      "regularPrice": "21199",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/04/Articulos-19-02-2026-04-01T161943.137.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/parlante-auto-retro-bluetooth-fm-usb-sd-om-596/",
-      "categories": [
-        "Audio, TV y Video",
-        "Parlante",
-        "Parlantes Bluetooth"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Audio, TV y Video",
-          "url": "https://dazimportadora.com.ar/c/audio-y-video/"
-        },
-        {
-          "name": "Parlante",
-          "url": "https://dazimportadora.com.ar/c/audio-y-video/parlante-con-cable/"
-        },
-        {
-          "name": "Parlantes Bluetooth",
-          "url": "https://dazimportadora.com.ar/c/audio-y-video/parlantes/"
-        }
-      ],
-      "brand": "",
       "sku": "",
       "stockStatus": "",
       "badge": ""
@@ -25567,6 +25521,43 @@
       "badge": ""
     },
     {
+      "name": "Proyector Astronauta Star Light laser + Parlante bluetooth",
+      "price": "18699",
+      "regularPrice": "18699",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2024/09/preventa-fotos-50.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/proyector-astronauta-star-light-laser-bluetooth/",
+      "categories": [
+        "Iluminacion",
+        "Hogar",
+        "Jugueteria",
+        "Artículos de Temporada"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Iluminacion",
+          "url": "https://dazimportadora.com.ar/c/ferreteria/iluminacion/"
+        },
+        {
+          "name": "Hogar",
+          "url": "https://dazimportadora.com.ar/c/hogar/"
+        },
+        {
+          "name": "Jugueteria",
+          "url": "https://dazimportadora.com.ar/c/hogar/jugueteria/"
+        },
+        {
+          "name": "Artículos de Temporada",
+          "url": "https://dazimportadora.com.ar/c/articulos-de-temporada/"
+        }
+      ],
+      "brand": "",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
       "name": "Mate Clasico Termico de Acero Inoxidable 260ML TH-01G",
       "price": "5799",
       "regularPrice": "5799",
@@ -26901,6 +26892,119 @@
       "badge": ""
     },
     {
+      "name": "Set De Ollas Oryx Ck200 5 Piezas Batería De Cocina Blanco",
+      "price": "61900",
+      "regularPrice": "61900",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-84.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/set-de-ollas-oryx-ck200-5-piezas-bateria-de-cocina-blanco/",
+      "categories": [
+        "Hogar",
+        "Cocina"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Hogar",
+          "url": "https://dazimportadora.com.ar/c/hogar/"
+        },
+        {
+          "name": "Cocina",
+          "url": "https://dazimportadora.com.ar/c/hogar/cocina/"
+        }
+      ],
+      "brand": "Oryx",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
+      "name": "Cable Para Iphone USB-C A USB-C 2M",
+      "price": "2290",
+      "regularPrice": "2290",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/4.jpg",
+      "productUrl": "https://dazimportadora.com.ar/producto/cable-para-iphone-usb-c-a-usb-c-2m/",
+      "categories": [
+        "Accesorios",
+        "Cables"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Accesorios",
+          "url": "https://dazimportadora.com.ar/c/accesorios/"
+        },
+        {
+          "name": "Cables",
+          "url": "https://dazimportadora.com.ar/c/accesorios/cables/"
+        }
+      ],
+      "brand": "Apple",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
+      "name": "Parlante Cuadrado Bluetooth Porta Celular JZ-1138",
+      "price": "14099",
+      "regularPrice": "14099",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-81-1.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/parlante-cuadrado-bluetooth-porta-celular-jsjz-jz-1138/",
+      "categories": [
+        "Audio, TV y Video",
+        "Parlante",
+        "Parlantes Bluetooth"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Audio, TV y Video",
+          "url": "https://dazimportadora.com.ar/c/audio-y-video/"
+        },
+        {
+          "name": "Parlante",
+          "url": "https://dazimportadora.com.ar/c/audio-y-video/parlante-con-cable/"
+        },
+        {
+          "name": "Parlantes Bluetooth",
+          "url": "https://dazimportadora.com.ar/c/audio-y-video/parlantes/"
+        }
+      ],
+      "brand": "",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
+      "name": "Radio Retro Recargable Porta Celular Bluetooth YUEGAN YG-7071",
+      "price": "27299",
+      "regularPrice": "27299",
+      "salePrice": null,
+      "onSale": false,
+      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2026/03/Articulos-19-02-80-1.png",
+      "productUrl": "https://dazimportadora.com.ar/producto/radio-retro-recargable-porta-celular-bluetooth-yuegan-yg-7071/",
+      "categories": [
+        "Audio, TV y Video",
+        "Radios"
+      ],
+      "categoriesDetail": [
+        {
+          "name": "Audio, TV y Video",
+          "url": "https://dazimportadora.com.ar/c/audio-y-video/"
+        },
+        {
+          "name": "Radios",
+          "url": "https://dazimportadora.com.ar/c/audio-y-video/radios/"
+        }
+      ],
+      "brand": "",
+      "sku": "",
+      "stockStatus": "",
+      "badge": ""
+    },
+    {
       "name": "Volante Con Pedalera y Joystick PS4 Consola Ps3 Pc Xbox GT-V7",
       "price": "132990",
       "regularPrice": "132990",
@@ -27343,75 +27447,6 @@
         {
           "name": "Iluminacion",
           "url": "https://dazimportadora.com.ar/c/ferreteria/iluminacion/"
-        }
-      ],
-      "brand": "",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "Lampara LED USB Espiral CREATIVE GIFT LIGHT",
-      "price": "8799",
-      "regularPrice": "8799",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-58.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/lampara-led-usb-espiral-creative-gift-light/",
-      "categories": [
-        "Hogar",
-        "Bazar & Deco",
-        "Ferretería",
-        "Iluminacion",
-        "Mas Vendidos"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Hogar",
-          "url": "https://dazimportadora.com.ar/c/hogar/"
-        },
-        {
-          "name": "Bazar & Deco",
-          "url": "https://dazimportadora.com.ar/c/hogar/bazar-deco/"
-        },
-        {
-          "name": "Ferretería",
-          "url": "https://dazimportadora.com.ar/c/ferreteria/"
-        },
-        {
-          "name": "Iluminacion",
-          "url": "https://dazimportadora.com.ar/c/ferreteria/iluminacion/"
-        },
-        {
-          "name": "Mas Vendidos",
-          "url": "https://dazimportadora.com.ar/c/mas-vendidos/"
-        }
-      ],
-      "brand": "",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "Router Wifi 4 Antenas B450L",
-      "price": "29990",
-      "regularPrice": "29990",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/12/12-12-9.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/router-wifi-4-antenas-b450l/",
-      "categories": [
-        "Tecnología",
-        "Informática"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Tecnología",
-          "url": "https://dazimportadora.com.ar/c/tecnologia/"
-        },
-        {
-          "name": "Informática",
-          "url": "https://dazimportadora.com.ar/c/tecnologia/informatica/"
         }
       ],
       "brand": "",
@@ -36448,60 +36483,6 @@
         }
       ],
       "brand": "",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "Hub USB DINAX dx-usbhub4p",
-      "price": "3390",
-      "regularPrice": "3390",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2023/12/43.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/hub-usb-dinax-dx-usbhub4p/",
-      "categories": [
-        "Tecnología",
-        "Informática",
-        "Accesorios"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Tecnología",
-          "url": "https://dazimportadora.com.ar/c/tecnologia/"
-        },
-        {
-          "name": "Informática",
-          "url": "https://dazimportadora.com.ar/c/tecnologia/informatica/"
-        },
-        {
-          "name": "Accesorios",
-          "url": "https://dazimportadora.com.ar/c/accesorios/"
-        }
-      ],
-      "brand": "Dinax",
-      "sku": "",
-      "stockStatus": "",
-      "badge": ""
-    },
-    {
-      "name": "Contadora de Billetes DINAX CON-CB03C",
-      "price": "84899",
-      "regularPrice": "84899",
-      "salePrice": null,
-      "onSale": false,
-      "imageUrl": "https://dazimportadora.com.ar/wp-content/uploads/2025/03/2.4GHZ-BT-3.png",
-      "productUrl": "https://dazimportadora.com.ar/producto/contadora-de-billetes-dinax-con-cb03c/",
-      "categories": [
-        "Tecnología"
-      ],
-      "categoriesDetail": [
-        {
-          "name": "Tecnología",
-          "url": "https://dazimportadora.com.ar/c/tecnologia/"
-        }
-      ],
-      "brand": "Dinax",
       "sku": "",
       "stockStatus": "",
       "badge": ""
