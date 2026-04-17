@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ProductCard from './ProductCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ProductGrid = ({ products, onAddToCart }) => {
+const ProductGrid = ({ products, onAddToCart, onViewProduct, onToggleFavorite, favorites = [] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
 
@@ -28,6 +28,9 @@ const ProductGrid = ({ products, onAddToCart }) => {
               <ProductCard 
                 product={product} 
                 onAddToCart={onAddToCart} 
+                onView={() => onViewProduct(product)}
+                onToggleFavorite={() => onToggleFavorite(product.id)}
+                isFavorite={favorites.includes(product.id)}
               />
             </motion.div>
           ))}
