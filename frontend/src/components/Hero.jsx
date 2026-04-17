@@ -42,8 +42,8 @@ const Hero = () => {
           </span>
           
           <h1 className="font-bebas text-7xl md:text-9xl text-white tracking-widest leading-none">
-            PRODUCTOS IMPORTADOS <br /> 
-            <span className="text-primary italic">CON DISEÑO</span>
+            PRODUCTOS <br /> 
+            <span className="text-primary italic">IMPORTADOS</span>
           </h1>
 
           <p className="font-jakarta text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
