@@ -589,18 +589,14 @@
         window.history.scrollRestoration = 'manual';
     }
 
-    // Google Sign-In initialization
     function initializeGoogleSignIn() {
-        if (googleInitialized) return;
-
         if (typeof window.google === 'undefined') {
-            console.log('⏳ Google API no cargado aún, reintentando...');
-            setTimeout(initializeGoogleSignIn, 500);
+            setTimeout(initializeGoogleSignIn, 100);
             return;
         }
 
+        if (googleInitialized) return;
         googleInitialized = true;
-        console.log('✅ Google API disponible, inicializando Sign-In...');
 
         try {
             window.google.accounts.id.initialize({
@@ -612,20 +608,22 @@
             const signinDiv = document.getElementById('google-signin');
             if (signinDiv) {
                 window.google.accounts.id.renderButton(signinDiv, {
-                    theme: 'dark',
-                    size: 'large'
+                    theme: 'outline',
+                    size: 'large',
+                    width: '200'
                 });
             }
 
             const signinContainer = document.getElementById('google-signin-container');
             if (signinContainer) {
                 window.google.accounts.id.renderButton(signinContainer, {
-                    theme: 'dark',
-                    size: 'large'
+                    theme: 'outline',
+                    size: 'large',
+                    width: '200'
                 });
             }
         } catch (error) {
-            console.error('❌ Error en Google Sign-In:', error);
+            console.error('Error Google Sign-In:', error);
         }
     }
 
