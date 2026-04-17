@@ -842,49 +842,47 @@
 
     async function loadProductsFromGoogleSheets() {
         try {
+            // Attempt 1: Fetch from live API (Neon DB)
             const response = await fetch('/api/products?v=' + Date.now(), { cache: 'no-store' });
-            if (!response.ok) throw new Error('Neon API status: ' + response.status);
-            const data = await response.json();
-            if (data.success && Array.isArray(data.products) && data.products.length > 0) {
-                parseProductsFromAPI(data.products);
-                renderProducts('all');
-                return;
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && Array.isArray(data.products) && data.products.length > 0) {
+                    parseProductsFromAPI(data.products);
+                    renderProducts('all');
+                    return;
+                }
             }
-            throw new Error('Neon sin productos, usando export local');
+            throw new Error('API no disponible o sin productos');
         } catch (error) {
-            console.warn('Fallback 1 activado:', error.message);
+            console.warn('Fallback 1: No se pudo cargar de API Neon, intentando JSON local...', error.message);
             try {
+                // Attempt 2: Fetch from static JSON export (all 552 products)
                 const response = await fetch('/public/products-data.json?v=' + Date.now(), { cache: 'no-store' });
-                if (!response.ok) {
-                    // Try without /public if it's served from root
-                    const altResponse = await fetch('/products-data.json?v=' + Date.now(), { cache: 'no-store' });
-                    if (!altResponse.ok) throw new Error('Export local no encontrado');
-                    const data = await altResponse.json();
+                const finalResponse = response.ok ? response : await fetch('/products-data.json?v=' + Date.now(), { cache: 'no-store' });
+                
+                if (finalResponse.ok) {
+                    const data = await finalResponse.json();
                     parseProductsFromAPI(data);
                     renderProducts('all');
                     return;
                 }
-                const data = await response.json();
-                parseProductsFromAPI(data);
-                renderProducts('all');
-                return;
-            } catch (exportError) {
-                console.warn('Fallback 2 activado:', exportError.message);
+                throw new Error('JSON local no encontrado');
+            } catch (jsonExportError) {
+                console.warn('Fallback 2: No se pudo cargar JSON local, intentando Google Sheets...', jsonExportError.message);
                 try {
+                    // Attempt 3: Fetch from Google Sheets CSV (Legacy fallback)
                     const response = await fetch(GOOGLE_SHEET_CSV_URL + '?v=' + Date.now(), { cache: 'no-store' });
-                if (!response.ok) throw new Error('Google Sheets status: ' + response.status);
-                const csvText = await response.text();
-                if (!csvText || csvText.length < 10) throw new Error('CSV vacio');
-                parseProductsFromCSV(csvText);
-                renderProducts('all');
-            } catch (sheetsError) {
-                try {
-                    const response = await fetch('/products.json?v=' + Date.now());
-                    const jsonData = await response.json();
-                    parseProductsFromJSON(jsonData);
-                    renderProducts('all');
-                } catch (jsonError) {
-                    console.error('Error cargando productos:', jsonError);
+                    if (response.ok) {
+                        const csvText = await response.text();
+                        if (csvText && csvText.length > 10) {
+                            parseProductsFromCSV(csvText);
+                            renderProducts('all');
+                            return;
+                        }
+                    }
+                    throw new Error('Google Sheets no disponible');
+                } catch (sheetsError) {
+                    console.error('❌ Error final: No se pudieron cargar productos de ninguna fuente:', sheetsError.message);
                 }
             }
         }
