@@ -1,11 +1,19 @@
 const { Pool } = require('pg');
-require('dotenv').config({ path: '../../.env' }); // Adjusted for relative path in monorepo
+const env = require('./env');
+const logger = require('./logger');
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    connectionString: env.DATABASE_URL,
+    ssl: env.isProduction || env.DATABASE_URL.includes('sslmode=require')
+        ? { rejectUnauthorized: false }
+        : false,
+    max: 10,
+    idleTimeoutMillis: 30_000,
+    connectionTimeoutMillis: 5_000,
+});
+
+pool.on('error', (err) => {
+    logger.error({ err }, 'Unexpected error on idle pg client');
 });
 
 const query = (text, params) => pool.query(text, params);
@@ -13,16 +21,14 @@ const query = (text, params) => pool.query(text, params);
 const testConnection = async () => {
     try {
         const res = await query('SELECT NOW()');
-        console.log('✅ Base de Datos conectada con éxito:', res.rows[0].now);
+        logger.info({ now: res.rows[0].now }, 'Database connected');
         return true;
     } catch (err) {
-        console.error('❌ Error conectando a Base de Datos:', err.message);
+        logger.error({ err: err.message }, 'Database connection failed');
         return false;
     }
 };
 
-module.exports = {
-    query,
-    testConnection,
-    pool
-};
+const closePool = () => pool.end();
+
+module.exports = { query, testConnection, closePool, pool };

@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 
 const categories = [
   { id: 'all', name: 'TODOS', icon: '✨' },
-  { id: 'bazar-cocina', name: 'BAZAR & COCINA', icon: '🍳' },
-  { id: 'electronica', name: 'ELECTRÓNICA', icon: '🔌' },
-  { id: 'hogar', name: 'HOGAR', icon: '🏠' },
-  { id: 'cuidado-personal', name: 'CUIDADO PERSONAL', icon: '🛁' },
-  { id: 'tecnologia', name: 'TECNOLOGÍA', icon: '💻' },
-  { id: 'varios', name: 'VARIOS', icon: '📦' },
+  { id: 'tecnologia-innovacion', name: 'TECNOLOGÍA & INNOVACIÓN', icon: '🚀' },
+  { id: 'audio-sonido-premium', name: 'AUDIO & SONIDO PREMIUM', icon: '🔊' },
+  { id: 'hogar-diseno', name: 'HOGAR & DISEÑO', icon: '🏺' },
+  { id: 'belleza-bienestar', name: 'BELLEZA & BIENESTAR', icon: '✨' },
+  { id: 'bazar-cocina-gourmet', name: 'BAZAR & COCINA GOURMET', icon: '👨‍🍳' },
+  { id: 'equipamiento-esencial', name: 'EQUIPAMIENTO ESENCIAL', icon: '🛠️' },
 ];
 
 const CategoryFilters = ({ currentCategory, onCategoryChange }) => {

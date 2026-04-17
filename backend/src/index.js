@@ -1,67 +1,143 @@
-require('dotenv').config({ path: '../.env' });
+const env = require('./config/env');
+const logger = require('./config/logger');
+const path = require('path');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const pinoHttp = require('pino-http');
 const rateLimit = require('express-rate-limit');
-const { testConnection } = require('./config/db');
+
+const { testConnection, closePool, query } = require('./config/db');
+const { notFound, errorHandler } = require('./middleware/errorHandler');
+
 const productRoutes = require('./routes/productRoutes');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.set('trust proxy', 1);
 
-// Security
+app.use(pinoHttp({
+    logger,
+    customLogLevel: (_req, res, err) => {
+        if (err || res.statusCode >= 500) return 'error';
+        if (res.statusCode >= 400) return 'warn';
+        return 'info';
+    },
+    serializers: {
+        req: (req) => ({ method: req.method, url: req.url }),
+        res: (res) => ({ statusCode: res.statusCode }),
+    },
+}));
+
 app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-            fontSrc: ["'self'", "https://fonts.gstatic.com"],
-            imgSrc: ["'self'", "data:", "https://res.cloudinary.com", "https://*.cloudinary.com", "https://i.pravatar.cc", "https://images.unsplash.com"],
-            connectSrc: ["'self'"],
-            mediaSrc: ["'self'", "https://res.cloudinary.com", "https://*.cloudinary.com"],
-            frameSrc: ["'none'"],
+            scriptSrc: ["'self'", 'https://accounts.google.com', 'https://apis.google.com'],
+            scriptSrcAttr: ["'none'"],
+            styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+            fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
+            imgSrc: ["'self'", 'data:', 'https://res.cloudinary.com', 'https://*.cloudinary.com',
+                     'https://i.pravatar.cc', 'https://images.unsplash.com',
+                     'https://lh3.googleusercontent.com'],
+            connectSrc: ["'self'", 'https://accounts.google.com'],
+            mediaSrc: ["'self'", 'https://res.cloudinary.com', 'https://*.cloudinary.com'],
+            frameSrc: ['https://accounts.google.com'],
+            objectSrc: ["'none'"],
+            baseUri: ["'self'"],
+            formAction: ["'self'"],
         },
     },
     crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
+
+const allowedOrigins = env.FRONTEND_URL
+    ? env.FRONTEND_URL.split(',').map(s => s.trim())
+    : [];
 app.use(cors({
-    origin: process.env.FRONTEND_URL || '*',
-    credentials: true
+    origin: (origin, cb) => {
+        if (!origin) return cb(null, true);
+        if (env.isDevelopment) return cb(null, true);
+        if (allowedOrigins.includes(origin)) return cb(null, true);
+        cb(new Error('CORS blocked'));
+    },
+    credentials: true,
 }));
 
-const limiter = rateLimit({
+app.use(express.json({ limit: '1mb' }));
+
+const readLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 200,
-    message: 'Too many requests, please try again later.'
+    max: 300,
+    standardHeaders: true,
+    legacyHeaders: false,
 });
-app.use('/api/', limiter);
+const writeLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 40,
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 20,
+    standardHeaders: true,
+    legacyHeaders: false,
+});
 
-app.use(express.json());
+app.use('/api/auth', authLimiter);
+app.use('/api', (req, res, next) => {
+    if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return readLimiter(req, res, next);
+    return writeLimiter(req, res, next);
+});
 
-const path = require('path');
+app.get('/api/health', async (_req, res) => {
+    try {
+        await query('SELECT 1');
+        res.json({ status: 'ok', db: 'up', timestamp: new Date().toISOString() });
+    } catch {
+        res.status(503).json({ status: 'degraded', db: 'down', timestamp: new Date().toISOString() });
+    }
+});
 
-// ... (existing middleware)
-
-// Serve Backend API routes
+app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/contacts', contactRoutes);
 
-// Health Check
-app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', timestamp: new Date() });
-});
+app.use('/api', notFound);
 
-// --- Unified Deployment Logic ---
-// Serving static files from the frontend build directory
 const frontendPath = path.join(__dirname, '../../frontend/dist');
-app.use(express.static(frontendPath));
-
-// Catch-all route to serve the React app for any non-API request
-app.get('*', (req, res) => {
+app.use(express.static(frontendPath, { maxAge: '1d', index: false }));
+app.get('*', (_req, res) => {
     res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
-app.listen(PORT, async () => {
-    console.log(`🚀 API Server running on port ${PORT}`);
+app.use(errorHandler);
+
+const server = app.listen(env.PORT, async () => {
+    logger.info({ port: env.PORT, env: env.NODE_ENV }, 'API listening');
     await testConnection();
 });
+
+const shutdown = (signal) => {
+    logger.info({ signal }, 'Shutdown requested');
+    server.close(async () => {
+        await closePool();
+        logger.info('Clean shutdown');
+        process.exit(0);
+    });
+    setTimeout(() => {
+        logger.warn('Forced shutdown after 10s');
+        process.exit(1);
+    }, 10_000).unref();
+};
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));

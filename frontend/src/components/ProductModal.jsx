@@ -56,7 +56,7 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart, isFavorite, onTog
                   </h2>
                 </div>
 
-                <p className="font-jakarta text-brand-muted text-lg leading-relaxed">
+                <p className="font-jakarta text-brand-muted text-lg leading-relaxed whitespace-pre-line">
                   {product.description || ''}
                 </p>
 
