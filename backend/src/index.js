@@ -20,6 +20,19 @@ const contactRoutes = require('./routes/contactRoutes');
 const app = express();
 app.set('trust proxy', 1);
 
+// Debug: Verify frontend dist path
+const frontendPath = path.resolve(__dirname, '../../frontend/dist');
+try {
+    const fs = require('fs');
+    if (fs.existsSync(frontendPath)) {
+        logger.info({ files: fs.readdirSync(frontendPath) }, 'Frontend dist found');
+    } else {
+        logger.error({ frontendPath }, 'Frontend dist NOT FOUND');
+    }
+} catch (e) {
+    logger.error({ err: e.message }, 'Error checking frontend path');
+}
+
 app.use(pinoHttp({
     logger,
     customLogLevel: (_req, res, err) => {
@@ -33,27 +46,11 @@ app.use(pinoHttp({
     },
 }));
 
+// Serve static files BEFORE CSP/Helmet/RateLimit to avoid blocking assets
+app.use(express.static(frontendPath));
+
 app.use(helmet({
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", 'https://accounts.google.com', 'https://apis.google.com'],
-            scriptSrcAttr: ["'none'"],
-            styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-            fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
-            imgSrc: ["'self'", 'data:', 'https://res.cloudinary.com', 'https://*.cloudinary.com',
-                     'https://i.pravatar.cc', 'https://images.unsplash.com',
-                     'https://lh3.googleusercontent.com'],
-            connectSrc: ["'self'", 'https://accounts.google.com'],
-            mediaSrc: ["'self'", 'https://res.cloudinary.com', 'https://*.cloudinary.com'],
-            frameSrc: ['https://accounts.google.com'],
-            objectSrc: ["'none'"],
-            baseUri: ["'self'"],
-            formAction: ["'self'"],
-        },
-    },
-    crossOriginEmbedderPolicy: false,
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    contentSecurityPolicy: false, // Temporarily disable to debug blank page
 }));
 
 const allowedOrigins = env.FRONTEND_URL
@@ -111,30 +108,20 @@ app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/contacts', contactRoutes);
-
 app.use('/api', notFound);
 
-const frontendPath = path.resolve(process.cwd(), '..', 'frontend', 'dist');
-logger.info({ 
-    frontendPath, 
-    cwd: process.cwd(), 
-    dirname: __dirname 
-}, 'Static files configuration');
-
-app.use(express.static(frontendPath));
-
+// Serve the React app for any other GET requests (SPA routing)
 app.get('*', (req, res) => {
     // Check if it's an API request first
     if (req.url.startsWith('/api/')) {
         return res.status(404).json({ error: 'API endpoint not found' });
     }
     
-    // Serve the index.html for all other GET requests (SPA routing)
     const indexPath = path.join(frontendPath, 'index.html');
     res.sendFile(indexPath, (err) => {
         if (err) {
             logger.error({ err, indexPath }, 'Failed to serve index.html');
-            res.status(500).send(`UI Error: The application was unable to load its interface. Please try again later. (Code: ${err.code})`);
+            res.status(500).send(`UI Error: The application was unable to load its interface (Code: ${err.code})`);
         }
     });
 });
