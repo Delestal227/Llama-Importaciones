@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1.25;
+    }
+  }, []);
+
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-charcoal">
       {/* Dynamic Video Background */}
       <div className="absolute inset-0">
         <video 
+          ref={videoRef}
           autoPlay 
-          loop 
           muted 
           playsInline
           className="w-full h-full object-cover opacity-60"
