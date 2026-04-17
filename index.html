@@ -1075,12 +1075,6 @@
 
         html += `
                 </div>
-                <button onclick="changeCarouselMedia(${product.id}, -1)" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded hover:bg-black/70 z-10">
-                    <span class="material-symbols-outlined text-sm">chevron_left</span>
-                </button>
-                <button onclick="changeCarouselMedia(${product.id}, 1)" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded hover:bg-black/70 z-10">
-                    <span class="material-symbols-outlined text-sm">chevron_right</span>
-                </button>
                 <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
                     ${media.map((_, idx) => `<div class="w-2 h-2 rounded-full ${idx === 0 ? 'bg-secondary' : 'bg-white/50'}" data-dot="${product.id}-${idx}"></div>`).join('')}
                 </div>
