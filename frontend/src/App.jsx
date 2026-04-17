@@ -5,6 +5,7 @@ import CategoryFilters from './components/CategoryFilters';
 import ProductGrid from './components/ProductGrid';
 import Cart from './components/Cart';
 import ProductModal from './components/ProductModal';
+import CheckoutModal from './components/CheckoutModal';
 import { getProducts } from './services/api';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [category, setCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   // Load products on mount and when category changes
   useEffect(() => {
@@ -89,15 +91,13 @@ function App() {
   };
 
   const handleCheckout = () => {
-    let message = `PEDIDO LLAMA IMPORTACIONES\n\nPRODUCTOS:\n`;
-    cart.forEach((item, index) => {
-      message += `${index + 1}. ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toLocaleString()}\n`;
-    });
-    const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    message += `\nTOTAL: $${subtotal.toLocaleString()}\n\nFavor confirmar disponibilidad.`;
-    
-    const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/543884046739?text=${encoded}`, '_blank');
+    if (cart.length === 0) return;
+    setIsCartOpen(false);
+    setIsCheckoutOpen(true);
+  };
+
+  const handleOrderSuccess = () => {
+    setCart([]);
   };
 
   return (
@@ -183,13 +183,20 @@ function App() {
         recommendations={products.filter(p => !cart.find(c => c.id === p.id)).slice(0, 3)}
       />
 
-      <ProductModal 
+      <ProductModal
         product={selectedProduct}
         isOpen={!!selectedProduct}
         onClose={() => setSelectedProduct(null)}
         onAddToCart={handleAddToCart}
         isFavorite={selectedProduct && favorites.includes(selectedProduct.id)}
         onToggleFavorite={handleToggleFavorite}
+      />
+
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        cart={cart}
+        onSuccess={handleOrderSuccess}
       />
     </div>
   );

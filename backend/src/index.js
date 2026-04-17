@@ -115,9 +115,13 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api', notFound);
 
 const frontendPath = path.join(__dirname, '../../frontend/dist');
-app.use(express.static(frontendPath, { maxAge: '1d', index: false }));
+app.use(express.static(frontendPath, { maxAge: '1d' }));
 app.get('*', (_req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
+    res.sendFile(path.join(frontendPath, 'index.html'), (err) => {
+        if (err) {
+            res.status(500).send('Error loading frontend');
+        }
+    });
 });
 
 app.use(errorHandler);

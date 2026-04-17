@@ -1,0 +1,31 @@
+{
+  "categorias": {
+    "Tecnología": [
+      {
+        "name": "Auriculares Test Bluetooth",
+        "sku": "TEST-AUR-001",
+        "price": 15000,
+        "stock": 5,
+        "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600",
+        "description": "Auriculares inalámbricos de prueba"
+      },
+      {
+        "name": "Cable Test USB-C",
+        "sku": "TEST-CAB-002",
+        "price": 3500,
+        "stock": 20,
+        "imageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600"
+      }
+    ],
+    "Hogar": [
+      {
+        "name": "Mate Test Acero Inoxidable",
+        "sku": "TEST-MAT-003",
+        "price": 8900,
+        "stock": 10,
+        "imageUrl": "https://images.unsplash.com/photo-1589923188651-268a9765e432?w=600",
+        "description": "Mate de acero para oficina"
+      }
+    ]
+  }
+}

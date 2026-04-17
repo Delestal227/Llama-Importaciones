@@ -1,8 +1,8 @@
-require('dotenv').config();
-const fs = require('fs');
 const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+const fs = require('fs');
 const cloudinary = require('cloudinary').v2;
-const { query, pool, testConnection } = require('../db');
+const { query, pool, testConnection } = require('../backend/src/config/db');
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, Menu, X, Search } from 'lucide-react';
+import { ShoppingCart, Menu, Search } from 'lucide-react';
+import AuthButton from './AuthButton';
 
 const Header = ({ cartCount, onOpenCart }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +49,7 @@ const Header = ({ cartCount, onOpenCart }) => {
             <Search size={22} />
           </button>
           
-          <button 
+          <button
             onClick={onOpenCart}
             className="relative p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-all border border-primary/20 group"
           >
@@ -59,6 +60,8 @@ const Header = ({ cartCount, onOpenCart }) => {
               </span>
             )}
           </button>
+
+          <AuthButton isScrolled={isScrolled} />
 
           <button className="md:hidden p-2 text-white">
             <Menu size={24} />
