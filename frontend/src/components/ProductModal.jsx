@@ -39,13 +39,13 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart, isFavorite, onTog
               <img 
                 src={product.images?.[0] || 'https://via.placeholder.com/800x800?text=No+Image'} 
                 alt={product.name}
-                className="w-full h-full object-contain md:object-cover"
+                className="w-full h-full object-contain"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
             </div>
 
             {/* Content Section */}
-            <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center overflow-y-auto">
+            <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center overflow-y-auto overflow-x-hidden">
               <div className="space-y-8">
                 <div>
                   <p className="text-xs font-bold text-primary tracking-[0.3em] uppercase mb-3">
@@ -57,7 +57,7 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart, isFavorite, onTog
                 </div>
 
                 <p className="font-jakarta text-brand-muted text-lg leading-relaxed">
-                  {product.description || 'Este producto ha sido seleccionado bajo los más estrictos criterios de calidad y diseño de Llama Importaciones.'}
+                  {product.description || ''}
                 </p>
 
                 <div className="pt-6 border-t border-surface-200 flex justify-between items-end">
@@ -93,9 +93,8 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart, isFavorite, onTog
                       onAddToCart(product, qty);
                       setQty(1);
                     }}
-                    className="w-full bg-primary text-white py-5 rounded-2xl font-bebas text-2xl tracking-widest flex items-center justify-center gap-3 hover:bg-primary-dark transition-all transform hover:scale-[1.02] shadow-xl hover:shadow-primary/20"
+                    className="w-full bg-primary text-white py-5 rounded-2xl font-bebas text-2xl tracking-widest flex items-center justify-center hover:bg-primary-dark transition-all transform hover:scale-[1.02] shadow-xl hover:shadow-primary/20"
                   >
-                    <ShoppingCart size={24} />
                     AGREGAR {qty > 1 && `(${qty})`} AL CARRITO
                   </button>
 

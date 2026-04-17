@@ -71,7 +71,7 @@ const ProductCard = ({ product, onAddToCart, onView, onToggleFavorite, isFavorit
         </div>
 
         <p className="text-brand-muted text-xs line-clamp-2 mb-4 font-light leading-relaxed min-h-[32px]">
-          {product.description || 'Producto importado de alta calidad seleccionado especialmente.'}
+          {product.description || ''}
         </p>
 
         <div className="pt-4 border-t border-surface-200">
