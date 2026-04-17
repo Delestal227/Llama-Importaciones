@@ -17,8 +17,9 @@ app.use(helmet({
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
             imgSrc: ["'self'", "data:", "https:"],
-            connectSrc: ["'self'", "https://accounts.google.com"],
-            frameSrc: ["https://accounts.google.com"]
+            connectSrc: ["'self'", "https://accounts.google.com", "https://script.google.com", "https://script.googleusercontent.com"],
+            frameSrc: ["https://accounts.google.com"],
+            mediaSrc: ["'self'", "https://res.cloudinary.com", "https:"]
         }
     },
     crossOriginEmbedderPolicy: false,
