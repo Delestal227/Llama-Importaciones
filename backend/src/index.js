@@ -114,12 +114,21 @@ app.use('/api/contacts', contactRoutes);
 
 app.use('/api', notFound);
 
-const frontendPath = path.join(__dirname, '../../frontend/dist');
+const frontendPath = path.resolve(__dirname, '..', '..', 'frontend', 'dist');
+logger.info({ frontendPath }, 'Serving static files');
+
 app.use(express.static(frontendPath, { maxAge: '1d' }));
-app.get('*', (_req, res) => {
+
+app.get('*', (req, res) => {
+    // If it's an API route that reached here, return 404
+    if (req.url.startsWith('/api')) {
+        return res.status(404).json({ error: 'API route not found' });
+    }
+    // Otherwise serve the React app
     res.sendFile(path.join(frontendPath, 'index.html'), (err) => {
         if (err) {
-            res.status(500).send('Error loading frontend');
+            console.error('Error sending index.html:', err);
+            res.status(500).send('Error loading frontend. Path: ' + frontendPath);
         }
     });
 });
