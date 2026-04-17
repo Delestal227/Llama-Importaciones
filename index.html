@@ -377,7 +377,17 @@
 
                 <!-- Action Button -->
                 <div id="cart-action" class="hidden">
-                    <button onclick="openCheckoutModal()" class="w-full bg-secondary text-[#B36843] px-8 py-4 rounded-lg font-bebas text-2xl tracking-widest hover:bg-[#F2EDE8] transition-all duration-300 mt-8">CONTINUAR AL PEDIDO</button>
+                    <div class="bg-surface-container-high p-6 rounded-lg mb-6">
+                        <div class="flex justify-between mb-4 font-body text-on-surface">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="flex justify-between font-bebas text-2xl text-secondary border-t border-secondary/30 pt-4">
+                            <span>TOTAL:</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                    </div>
+                    <button onclick="openCheckoutModal()" class="w-full bg-secondary text-[#B36843] px-8 py-4 rounded-lg font-bebas text-2xl tracking-widest hover:bg-[#F2EDE8] transition-all duration-300">CONTINUAR AL PEDIDO</button>
                 </div>
             </div>
         </div>
@@ -840,11 +850,28 @@
                 renderProducts('all');
                 return;
             }
-            throw new Error('Neon sin productos, usando fallback');
+            throw new Error('Neon sin productos, usando export local');
         } catch (error) {
-            console.warn('Fallback activado:', error.message);
+            console.warn('Fallback 1 activado:', error.message);
             try {
-                const response = await fetch(GOOGLE_SHEET_CSV_URL + '?v=' + Date.now(), { cache: 'no-store' });
+                const response = await fetch('/public/products-data.json?v=' + Date.now(), { cache: 'no-store' });
+                if (!response.ok) {
+                    // Try without /public if it's served from root
+                    const altResponse = await fetch('/products-data.json?v=' + Date.now(), { cache: 'no-store' });
+                    if (!altResponse.ok) throw new Error('Export local no encontrado');
+                    const data = await altResponse.json();
+                    parseProductsFromAPI(data);
+                    renderProducts('all');
+                    return;
+                }
+                const data = await response.json();
+                parseProductsFromAPI(data);
+                renderProducts('all');
+                return;
+            } catch (exportError) {
+                console.warn('Fallback 2 activado:', exportError.message);
+                try {
+                    const response = await fetch(GOOGLE_SHEET_CSV_URL + '?v=' + Date.now(), { cache: 'no-store' });
                 if (!response.ok) throw new Error('Google Sheets status: ' + response.status);
                 const csvText = await response.text();
                 if (!csvText || csvText.length < 10) throw new Error('CSV vacio');
@@ -1408,9 +1435,18 @@
 
     // Update Totals
     function updateTotals() {
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        document.getElementById('subtotal').textContent = `$${subtotal.toLocaleString()}`;
-        document.getElementById('total').textContent = `$${subtotal.toLocaleString()}`;
+        const subtotalValue = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const subtotalEl = document.getElementById('subtotal');
+        const totalEl = document.getElementById('total');
+        
+        if (subtotalEl) subtotalEl.textContent = `$${subtotalValue.toLocaleString()}`;
+        if (totalEl) totalEl.textContent = `$${subtotalValue.toLocaleString()}`;
+        
+        // Also update checkout totals if they exist
+        const checkoutSubtotal = document.getElementById('checkout-subtotal');
+        const checkoutTotal = document.getElementById('checkout-total');
+        if (checkoutSubtotal) checkoutSubtotal.textContent = `$${subtotalValue.toLocaleString()}`;
+        if (checkoutTotal) checkoutTotal.textContent = `$${subtotalValue.toLocaleString()}`;
     }
 
     // Open Cart
