@@ -65,7 +65,7 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart, isFavorite, onTog
                     <p className="text-xs font-bold text-brand-muted uppercase tracking-widest mb-2">Precio de Lista</p>
                     <div className="flex items-baseline gap-4">
                       <span className="font-bebas text-5xl text-brand-charcoal">
-                        ${product.price?.toLocaleString()}
+                        ${Math.floor(product.price || 0).toLocaleString()}
                       </span>
                     </div>
                   </div>

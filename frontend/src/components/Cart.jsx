@@ -72,7 +72,7 @@ const Cart = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, onCheckout, o
                         </button>
                       </div>
                       <p className="text-primary font-bebas text-lg mb-3">
-                        ${item.price.toLocaleString()}
+                        ${Math.floor(item.price).toLocaleString()}
                       </p>
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-3 bg-white/50 rounded-lg p-1 border border-white/50">
@@ -91,7 +91,7 @@ const Cart = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, onCheckout, o
                           </button>
                         </div>
                         <p className="font-bebas text-xl text-brand-charcoal">
-                          ${(item.price * item.quantity).toLocaleString()}
+                          ${Math.floor(item.price * item.quantity).toLocaleString()}
                         </p>
                       </div>
                     </div>
@@ -110,7 +110,7 @@ const Cart = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, onCheckout, o
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-bebas text-sm text-brand-charcoal truncate">{product.name}</p>
-                        <p className="text-primary font-bebas text-xs">${product.price.toLocaleString()}</p>
+                        <p className="text-primary font-bebas text-xs">${Math.floor(product.price).toLocaleString()}</p>
                       </div>
                       <button 
                         onClick={() => onAddToCart(product, 1)}
@@ -131,7 +131,7 @@ const Cart = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, onCheckout, o
               <div className="p-8 border-t border-white/20 space-y-6 bg-white/20">
                 <div className="flex justify-between items-center">
                   <p className="font-jakarta text-brand-muted font-medium tracking-widest text-xs uppercase">SUBTOTAL</p>
-                  <p className="font-bebas text-3xl text-brand-charcoal">${subtotal.toLocaleString()}</p>
+                  <p className="font-bebas text-3xl text-brand-charcoal">${Math.floor(subtotal).toLocaleString()}</p>
                 </div>
                 <button 
                   onClick={onCheckout}

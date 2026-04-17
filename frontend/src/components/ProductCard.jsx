@@ -79,7 +79,7 @@ const ProductCard = ({ product, onAddToCart, onView, onToggleFavorite, isFavorit
             <div>
               <p className="text-[10px] text-brand-muted font-bold uppercase tracking-widest mb-1">Precio</p>
               <p className="font-bebas text-4xl text-brand-charcoal leading-none">
-                ${product.price?.toLocaleString()}
+                ${Math.floor(product.price || 0).toLocaleString()}
               </p>
             </div>
             

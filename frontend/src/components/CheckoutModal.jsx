@@ -11,10 +11,10 @@ const buildWhatsAppMessage = (cart, order) => {
   if (order?.id) msg += ` #${order.id}`;
   msg += `\n\nPRODUCTOS:\n`;
   cart.forEach((item, i) => {
-    msg += `${i + 1}. ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toLocaleString()}\n`;
+    msg += `${i + 1}. ${item.name} (x${item.quantity}) - $${Math.floor(item.price * item.quantity).toLocaleString()}\n`;
   });
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  msg += `\nTOTAL: $${subtotal.toLocaleString()}\n\nConfirmo disponibilidad y coordino pago/env\u00edo.`;
+  msg += `\nTOTAL: $${Math.floor(subtotal).toLocaleString()}\n\nConfirmo disponibilidad y coordino pago/env\u00edo.`;
   return msg;
 };
 
@@ -151,7 +151,7 @@ const CheckoutModal = ({ isOpen, onClose, cart, onSuccess }) => {
                 )}
                 <div className="flex justify-between items-center pt-2">
                   <span className="font-jakarta text-xs tracking-widest text-brand-muted uppercase">Total</span>
-                  <span className="font-bebas text-3xl text-brand-charcoal">${total.toLocaleString()}</span>
+                  <span className="font-bebas text-3xl text-brand-charcoal">${Math.floor(total).toLocaleString()}</span>
                 </div>
                 <button type="submit" disabled={submitting}
                   className="w-full btn-primary py-4 text-base flex items-center justify-center gap-2 disabled:opacity-60">
