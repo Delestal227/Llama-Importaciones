@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 
-const Cart = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, onCheckout }) => {
+const Cart = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, onCheckout, onAddToCart, recommendations = [] }) => {
   const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
   return (
@@ -98,6 +98,32 @@ const Cart = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, onCheckout })
                   </div>
                 ))
               )}
+            {/* Recommendations Section */}
+            {recommendations.length > 0 && cart.length > 0 && (
+              <div className="p-6 bg-surface-50 border-t border-white/20">
+                <h3 className="font-bebas text-xl text-brand-charcoal mb-4 tracking-wide">TE PUEDE INTERESAR</h3>
+                <div className="space-y-4">
+                  {recommendations.map(product => (
+                    <div key={product.id} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-surface-200 shadow-sm">
+                      <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0">
+                        <img src={product.images?.[0]} alt={product.name} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bebas text-sm text-brand-charcoal truncate">{product.name}</p>
+                        <p className="text-primary font-bebas text-xs">${product.price.toLocaleString()}</p>
+                      </div>
+                      <button 
+                        onClick={() => onAddToCart(product, 1)}
+                        className="p-2 bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-lg transition-all"
+                        title="Agregar rápido"
+                      >
+                        <Plus size={16} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             </div>
 
             {/* Footer */}

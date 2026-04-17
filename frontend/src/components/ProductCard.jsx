@@ -1,8 +1,9 @@
-import React from 'react';
-import { ShoppingCart, Heart, Eye } from 'lucide-react';
+import React, { useState } from 'react';
+import { ShoppingCart, Heart, Eye, Plus, Minus } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ProductCard = ({ product, onAddToCart, onView, onToggleFavorite, isFavorite }) => {
+  const [qty, setQty] = useState(1);
   const isAgotado = product.stock === 0 && product.sku;
   const isConsultar = product.stock === 0 && !product.sku;
   
@@ -81,15 +82,29 @@ const ProductCard = ({ product, onAddToCart, onView, onToggleFavorite, isFavorit
                 ${product.price?.toLocaleString()}
               </p>
             </div>
-            {product.stock > 0 && (
-              <p className="text-[10px] text-green-600 font-bold bg-green-50 px-2 py-1 rounded-md">DISPONIBLE</p>
-            )}
+            
+            <div className="flex items-center gap-3 bg-surface-100 rounded-lg p-1 border border-surface-200">
+              <button 
+                onClick={(e) => { e.stopPropagation(); setQty(Math.max(1, qty - 1)); }}
+                className="p-1.5 hover:bg-white rounded-md transition-all text-brand-muted hover:text-primary"
+              >
+                <Minus size={14} />
+              </button>
+              <span className="font-bebas text-lg w-6 text-center text-brand-charcoal">{qty}</span>
+              <button 
+                onClick={(e) => { e.stopPropagation(); setQty(qty + 1); }}
+                className="p-1.5 hover:bg-white rounded-md transition-all text-brand-muted hover:text-primary"
+              >
+                <Plus size={14} />
+              </button>
+            </div>
           </div>
           
           <button 
             onClick={(e) => {
               e.stopPropagation();
-              onAddToCart(product);
+              onAddToCart(product, qty);
+              setQty(1); // Reset after adding
             }}
             disabled={isAgotado}
             className={`w-full flex items-center justify-center gap-3 py-4 rounded-2xl transition-all duration-300 font-bebas text-xl tracking-widest ${
@@ -99,7 +114,7 @@ const ProductCard = ({ product, onAddToCart, onView, onToggleFavorite, isFavorit
             }`}
           >
             <ShoppingCart size={20} />
-            AGREGAR AL CARRITO
+            AGREGAR {qty > 1 && `(${qty})`} AL CARRITO
           </button>
         </div>
       </div>

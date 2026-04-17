@@ -56,18 +56,17 @@ function App() {
     localStorage.setItem('llama-favorites', JSON.stringify(favorites));
   }, [favorites]);
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (product, quantity = 1) => {
     setCart(prev => {
       const existing = prev.find(item => item.id === product.id);
       if (existing) {
         return prev.map(item => 
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
         );
       }
-      return [...prev, { ...product, quantity: 1 }];
+      return [...prev, { ...product, quantity }];
     });
-    // Auto-open cart for feedback
-    setIsCartOpen(true);
+    // Removed auto-open cart as requested
   };
 
   const handleToggleFavorite = (productId) => {
@@ -180,6 +179,8 @@ function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemove={handleRemoveFromCart}
         onCheckout={handleCheckout}
+        onAddToCart={handleAddToCart}
+        recommendations={products.filter(p => !cart.find(c => c.id === p.id)).slice(0, 3)}
       />
 
       <ProductModal 

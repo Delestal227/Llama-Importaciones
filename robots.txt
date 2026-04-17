@@ -4,4 +4,4 @@ Disallow: /api/
 Disallow: /.git/
 Disallow: /.claude/
 
-Sitemap: https://llama-importaciones.onrender.com/sitemap.xml
+Sitemap: https://llamaimportaciones.onrender.com/sitemap.xml

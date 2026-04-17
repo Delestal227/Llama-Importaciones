@@ -12,4 +12,4 @@ services:
       - key: NODE_ENV
         value: production
       - key: VITE_API_URL
-        value: https://llama-importaciones.onrender.com/api
+        value: https://llamaimportaciones.onrender.com/api

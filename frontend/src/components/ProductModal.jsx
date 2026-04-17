@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShoppingCart, Heart, Check } from 'lucide-react';
+import { X, ShoppingCart, Heart, Check, Plus, Minus } from 'lucide-react';
 
 const ProductModal = ({ product, isOpen, onClose, onAddToCart, isFavorite, onToggleFavorite }) => {
+  const [qty, setQty] = useState(1);
   if (!product) return null;
 
   return (
@@ -59,28 +60,43 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart, isFavorite, onTog
                   {product.description || 'Este producto ha sido seleccionado bajo los más estrictos criterios de calidad y diseño de Llama Importaciones.'}
                 </p>
 
-                <div className="pt-6 border-t border-surface-200">
-                  <p className="text-xs font-bold text-brand-muted uppercase tracking-widest mb-2">Precio de Lista</p>
-                  <div className="flex items-baseline gap-4">
-                    <span className="font-bebas text-5xl text-brand-charcoal">
-                      ${product.price?.toLocaleString()}
-                    </span>
-                    <span className="text-sm font-jakarta text-green-600 font-bold bg-green-50 px-3 py-1 rounded-full">
-                      Stock Disponible
-                    </span>
+                <div className="pt-6 border-t border-surface-200 flex justify-between items-end">
+                  <div>
+                    <p className="text-xs font-bold text-brand-muted uppercase tracking-widest mb-2">Precio de Lista</p>
+                    <div className="flex items-baseline gap-4">
+                      <span className="font-bebas text-5xl text-brand-charcoal">
+                        ${product.price?.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 bg-surface-100 rounded-xl p-2 border border-surface-200">
+                    <button 
+                      onClick={() => setQty(Math.max(1, qty - 1))}
+                      className="p-2 hover:bg-white rounded-lg transition-all text-brand-muted hover:text-primary shadow-sm hover:shadow-md"
+                    >
+                      <Minus size={20} />
+                    </button>
+                    <span className="font-bebas text-3xl w-10 text-center text-brand-charcoal">{qty}</span>
+                    <button 
+                      onClick={() => setQty(qty + 1)}
+                      className="p-2 hover:bg-white rounded-lg transition-all text-brand-muted hover:text-primary shadow-sm hover:shadow-md"
+                    >
+                      <Plus size={20} />
+                    </button>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-4 pt-4">
                   <button 
                     onClick={() => {
-                      onAddToCart(product);
-                      // Don't close modal to let user continue seeing it
+                      onAddToCart(product, qty);
+                      setQty(1);
                     }}
                     className="w-full bg-primary text-white py-5 rounded-2xl font-bebas text-2xl tracking-widest flex items-center justify-center gap-3 hover:bg-primary-dark transition-all transform hover:scale-[1.02] shadow-xl hover:shadow-primary/20"
                   >
                     <ShoppingCart size={24} />
-                    AGREGAR AL CARRITO
+                    AGREGAR {qty > 1 && `(${qty})`} AL CARRITO
                   </button>
 
                   <button 
