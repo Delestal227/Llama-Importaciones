@@ -114,21 +114,27 @@ app.use('/api/contacts', contactRoutes);
 
 app.use('/api', notFound);
 
-const frontendPath = path.resolve(__dirname, '..', '..', 'frontend', 'dist');
-logger.info({ frontendPath }, 'Serving static files');
+const frontendPath = path.resolve(process.cwd(), '..', 'frontend', 'dist');
+logger.info({ 
+    frontendPath, 
+    cwd: process.cwd(), 
+    dirname: __dirname 
+}, 'Static files configuration');
 
-app.use(express.static(frontendPath, { maxAge: '1d' }));
+app.use(express.static(frontendPath));
 
 app.get('*', (req, res) => {
-    // If it's an API route that reached here, return 404
-    if (req.url.startsWith('/api')) {
-        return res.status(404).json({ error: 'API route not found' });
+    // Check if it's an API request first
+    if (req.url.startsWith('/api/')) {
+        return res.status(404).json({ error: 'API endpoint not found' });
     }
-    // Otherwise serve the React app
-    res.sendFile(path.join(frontendPath, 'index.html'), (err) => {
+    
+    // Serve the index.html for all other GET requests (SPA routing)
+    const indexPath = path.join(frontendPath, 'index.html');
+    res.sendFile(indexPath, (err) => {
         if (err) {
-            console.error('Error sending index.html:', err);
-            res.status(500).send('Error loading frontend. Path: ' + frontendPath);
+            logger.error({ err, indexPath }, 'Failed to serve index.html');
+            res.status(500).send(`UI Error: The application was unable to load its interface. Please try again later. (Code: ${err.code})`);
         }
     });
 });
