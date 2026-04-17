@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-jakarta bg-surface-100 text-brand-charcoal transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-premium;
+  }
+  
+  .glass-dark {
+    @apply bg-brand-charcoal/80 backdrop-blur-md border border-white/10 shadow-premium;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-xl font-jakarta font-semibold tracking-wide hover:bg-primary-dark transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary border border-primary/20 px-6 py-3 rounded-xl font-jakarta font-semibold hover:bg-surface-100 transition-all duration-300;
+  }
+
+  .card-premium {
+    @apply bg-white rounded-2xl overflow-hidden shadow-premium hover:shadow-premium-hover transition-all duration-500 transform hover:-translate-y-1;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #E67E22;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D35400;
+}
